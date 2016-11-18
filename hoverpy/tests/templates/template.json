@@ -1,0 +1,16 @@
+{
+    "data": [{
+        "response": {
+            "status": 200,
+            "body": "<h1>Matched on template</h1>",
+            "encodedBody": false,
+            "headers": {
+                "Content-Type": ["text/html; charset=utf-8"]
+            }
+        },
+        "request": {
+            "requestType": "template",
+            "path": "/template"
+        }
+    }]
+}

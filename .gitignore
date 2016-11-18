@@ -1,0 +1,10 @@
+*.bak
+*.pyc
+requests.db
+*.log
+*.zip*
+/build
+.pypirc
+/hoverpy.egg-info
+/dist
+/bin
