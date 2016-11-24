@@ -56,7 +56,7 @@ import zipfile
 import stat
 import hoverpy.config as config
 
-version = '0.0.2'
+version = '0.1.0'
 dist_version = '0.9.0'
 
 hoverfly = config.getHoverFlyBinaryPath()
@@ -74,8 +74,8 @@ setup(
   description = 'A python library for HoverFly',
   author = 'SpectoLabs',
   author_email = 'shyal@shyal.com',
-  url = 'https://github.com/shyal/hoverpy',
-  download_url = 'https://github.com/shyal/hoverpy/tarball/%s'%version,
+  url = 'https://github.com/SpectoLabs/hoverpy',
+  download_url = 'https://github.com/SpectoLabs/hoverpy/tarball/%s'%version,
   keywords = ['testing', 'rest', 'caching', 'ci'],
   test_suite = 'hoverpy.tests.get_suite',
   classifiers = [],

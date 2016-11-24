@@ -14,7 +14,15 @@ VERSION=$(shell head -1 VERSION)
 # ┬─┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐  ┌─┐┌─┐┌┬┐┌─┐┬ ┬  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┬┌─┐┬─┐┌─┐┬┌─┐┌┐┌
 # ├┬┘├┤ │  ├┤ ├─┤└─┐├┤   ├─┘├─┤ │ │  ├─┤   │ ├┤ └─┐ │   └┐┌┘├┤ ├┬┘└─┐││ ││││
 # ┴└─└─┘┴─┘└─┘┴ ┴└─┘└─┘  ┴  ┴ ┴ ┴ └─┘┴ ┴   ┴ └─┘└─┘ ┴    └┘ └─┘┴└─└─┘┴└─┘┘└┘
-release_test_patch: clean semver_patch tag push_tags commit push register_test upload_test clean
+release_test_patch: clean patch_tag commit push reg_and_upload_to_pypi clean
+
+release_test: clean tag commit push reg_and_upload_to_pypi clean
+
+reg_and_upload_to_pypi: register_test upload_test
+
+patch_tag: semver_patch tag
+
+tag: do_tag push_tags
 
 # ╦┌┐┌┌─┐┌┬┐┌─┐┬  ┬    ┬  ┌─┐┌┬┐┌─┐┌─┐┌┬┐  ┌┬┐┌─┐┌─┐┌┬┐  ┌┐ ┬ ┬┬┬  ┌┬┐  ┌─┐┬─┐┌─┐┌┬┐  ┌─┐┬┌─┐
 # ║│││└─┐ │ ├─┤│  │    │  ├─┤ │ ├┤ └─┐ │    │ ├┤ └─┐ │   ├┴┐│ │││   ││  ├┤ ├┬┘│ ││││  ├─┘│├─┘
@@ -80,7 +88,7 @@ register_test:
 upload_test:
 	python setup.py sdist upload -r pypitest
 
-tag:
+do_tag:
 	git tag $(VERSION) -m "Adds a tag so that we can put this on PyPI."
 
 push_tags:
