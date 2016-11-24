@@ -21,20 +21,20 @@ getServiceData()
 
 # There are two ways to add delays. One is to call the delays method
 # with the desired delay rules passed in as a json document 
-print hp.delays({"data":[
+print(hp.delays({"data":[
                     {
                       "urlPattern": "md5.jsontest.com",
                       "delay": 1000
                     }
                   ]
                 }
-              )
+              ))
 
 # the other more pythonic way is to call addDelay(...)
-print hp.addDelay(urlPattern="echo.jsontest.com", delay=3000)
+print(hp.addDelay(urlPattern="echo.jsontest.com", delay=3000))
 
 # now let's switch over to simulate mode
-print hp.simulate()
+print(hp.simulate())
 
 # make the requests. This time HoverFly adds the simulated delays.
 # these requests would normally be run asynchronously, and we could deal

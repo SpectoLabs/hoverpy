@@ -41,28 +41,28 @@ getServiceData()
 There are two ways to add delays. One is to call the delays method with the desired delay rules passed in as a json document  
 
 ```python
-print hp.delays({"data":[
+print(hp.delays({"data":[
                     {
                       "urlPattern": "md5.jsontest.com",
                       "delay": 1000
                     }
                   ]
                 }
-              )
+              ))
 
 ```
 
 The other more pythonic way is to call addDelay(...) 
 
 ```python
-print hp.addDelay(urlPattern="echo.jsontest.com", delay=3000)
+print(hp.addDelay(urlPattern="echo.jsontest.com", delay=3000))
 
 ```
 
 Now let's switch over to simulate mode 
 
 ```python
-print hp.simulate()
+print(hp.simulate())
 
 ```
 

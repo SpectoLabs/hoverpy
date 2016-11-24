@@ -22,7 +22,7 @@ dist = getOS()+"_"+getArch()
 
 dirName = os.path.dirname(os.path.abspath(__file__))
 
-version = '0.0.0'
+version = '0.0.1'
 dist_version = '0.9.0'
 
 def getHoverFlyBinaryPath():
@@ -42,9 +42,9 @@ def getHoverFlyBinaryPath():
 
 def downloadHoverFly():
   bundlePath = "/tmp/hoverfly_bundle_%s.zip"%dist
-  print "DOWNLOADING HOVERFLY"
+  print("DOWNLOADING HOVERFLY")
   urllib.urlretrieve("https://github.com/SpectoLabs/hoverfly/releases/download/v%s/hoverfly_bundle_%s.zip"%(dist_version, dist), bundlePath)
-  print "UNZIPPING"
+  print("UNZIPPING")
   zip_ref = zipfile.ZipFile(bundlePath, 'r')
   zip_ref.extractall("/tmp/")
   zip_ref.close()
@@ -62,12 +62,12 @@ def installHoverFly():
   devMode = os.path.isfile(os.path.join(dirName, "..", "README.md"))
 
   if devMode:
-    print "We are in dev mode! Copying binary to ourselves!"
+    print("We are in dev mode! Copying binary to ourselves!")
     targetDir = os.path.join(dirName, "..", "bin")
     target = os.path.join(targetDir, "hoverfly")
     if not os.path.isdir(targetDir):
       os.mkdir(targetDir)
     shutil.copy("/tmp/hoverfly", target)
   else:
-    print "We don't seem to be in dev mode"
+    print("We don't seem to be in dev mode")
 

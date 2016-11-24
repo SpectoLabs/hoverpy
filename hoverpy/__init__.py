@@ -141,7 +141,7 @@ def quick_test():
   hp.capture()
   requests.get("http://ip.jsontest.com/ip")
   if "data" in hp.delays().keys():
-    print "HOVERPY AND HOVERFLY QUICK TEST SUCCESS!!"
+    print("HOVERPY AND HOVERFLY QUICK TEST SUCCESS!!")
 
 if __name__ == "__main__":
   quick_test()
