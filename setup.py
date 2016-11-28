@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.1.1'
+version = '0.1.2'
 dist_version = '0.9.0'
 
 setup(

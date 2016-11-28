@@ -22,7 +22,7 @@ dist = getOS()+"_"+getArch()
 
 dirName = os.path.dirname(os.path.abspath(__file__))
 
-version = '0.1.1'
+version = '0.1.2'
 dist_version = '0.9.0'
 hoverflyDirectory = os.path.join(os.path.expanduser("~"), ".hoverfly", "bin", "dist_v"+dist_version, getOS()+"_"+getArch(),)
 hoverflyPath = os.path.join(hoverflyDirectory, "hoverfly")
@@ -54,7 +54,6 @@ def downloadHoverFly():
   st = os.stat('/tmp/hoverfly')
   os.chmod('/tmp/hoverfly', st.st_mode | stat.S_IEXEC)
   print("Deleting downloaded zip file")
-  print(("hoverfly binary at", '/tmp/hoverfly'))
   os.unlink(bundlePath)
   return installHoverFly()
 
@@ -63,7 +62,7 @@ def installHoverFly():
     os.makedirs(hoverflyDirectory)
   shutil.copy("/tmp/hoverfly", hoverflyPath)
   if os.path.isfile(hoverflyPath):
-    print("Hoverfly installed successfully")
+    print("Hoverfly installed successfully: %s" % hoverflyPath)
   else:
     raise ValueError('HoverFly binary not installed successfully')
   return hoverflyPath
