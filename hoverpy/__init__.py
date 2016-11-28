@@ -1,16 +1,26 @@
 import time
 import os
-import requests
 import logging
 import json
 import subprocess
 from subprocess import Popen, PIPE
 import platform
+import sys
+
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import config
+
+try:
+  import requests
+except:
+  pass
 
 logging.basicConfig(filename='hoverfly.log',level=logging.DEBUG)
 
 hoverfly = config.getHoverFlyBinaryPath()
+
+if not hoverfly:
+  hoverfly = config.downloadHoverFly()
 
 def session():
   session = requests.Session()

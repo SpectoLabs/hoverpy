@@ -22,28 +22,31 @@ dist = getOS()+"_"+getArch()
 
 dirName = os.path.dirname(os.path.abspath(__file__))
 
-version = '0.1.0'
+version = '0.1.1'
 dist_version = '0.9.0'
+hoverflyDirectory = os.path.join(os.path.expanduser("~"), ".hoverfly", "bin", "dist_v"+dist_version, getOS()+"_"+getArch(),)
+hoverflyPath = os.path.join(hoverflyDirectory, "hoverfly")
 
 def getHoverFlyBinaryPath():
-  """
-  get hoverpy from where setup.py would have installed it
-  """
-  hoverfly = os.path.join(dirName, "..", "bin", "hoverfly")
-  if os.path.isfile(hoverfly):
-    return hoverfly
-
-  for path in sys.path:
-    newPath = os.path.join(path, "..", "..", "..", "hoverpy", "bin", version, "dist_v"+dist_version, getOS()+"_"+getArch(), "hoverfly")
-    if os.path.isfile(newPath):
-      return newPath
-
+  if os.path.isfile(hoverflyPath):
+    return hoverflyPath
   return ""
 
 def downloadHoverFly():
   bundlePath = "/tmp/hoverfly_bundle_%s.zip"%dist
   print("DOWNLOADING HOVERFLY")
-  urllib.urlretrieve("https://github.com/SpectoLabs/hoverfly/releases/download/v%s/hoverfly_bundle_%s.zip"%(dist_version, dist), bundlePath)
+
+  url = "https://github.com/SpectoLabs/hoverfly/releases/download/v%s/hoverfly_bundle_%s.zip"%(dist_version, dist)
+
+  if sys.version_info.major == 2:
+    import urllib
+    urllib.urlretrieve(url, bundlePath)
+  elif sys.version_info.major == 3:
+    import shutil
+    import urllib.request
+    with urllib.request.urlopen(url) as response, open(bundlePath, 'wb') as out_file:
+        shutil.copyfileobj(response, out_file)
+
   print("UNZIPPING")
   zip_ref = zipfile.ZipFile(bundlePath, 'r')
   zip_ref.extractall("/tmp/")
@@ -51,23 +54,16 @@ def downloadHoverFly():
   st = os.stat('/tmp/hoverfly')
   os.chmod('/tmp/hoverfly', st.st_mode | stat.S_IEXEC)
   print("Deleting downloaded zip file")
-  print("hoverfly binary at", '/tmp/hoverfly')
+  print(("hoverfly binary at", '/tmp/hoverfly'))
   os.unlink(bundlePath)
-  installHoverFly()
+  return installHoverFly()
 
 def installHoverFly():
-  # figure out where we are. Are we a dev?
-  # or are we a library that's been installed?
-
-  devMode = os.path.isfile(os.path.join(dirName, "..", "README.md"))
-
-  if devMode:
-    print("We are in dev mode! Copying binary to ourselves!")
-    targetDir = os.path.join(dirName, "..", "bin")
-    target = os.path.join(targetDir, "hoverfly")
-    if not os.path.isdir(targetDir):
-      os.mkdir(targetDir)
-    shutil.copy("/tmp/hoverfly", target)
+  if not os.path.isdir(hoverflyDirectory):
+    os.makedirs(hoverflyDirectory)
+  shutil.copy("/tmp/hoverfly", hoverflyPath)
+  if os.path.isfile(hoverflyPath):
+    print("Hoverfly installed successfully")
   else:
-    print("We don't seem to be in dev mode")
-
+    raise ValueError('HoverFly binary not installed successfully')
+  return hoverflyPath

@@ -39,12 +39,21 @@ test_install_from_pip:
 # ┌┐ ┬ ┬┬┬  ┌┬┐  ┌─┐┌┐┌┌┬┐  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┌─┐┌─┐┌─┐┬  ┬ ┬ ┬
 # ├┴┐│ │││   ││  ├─┤│││ ││   │ ├┤ └─┐ │   │  │ ││  ├─┤│  │ └┬┘
 # └─┘└─┘┴┴─┘─┴┘  ┴ ┴┘└┘─┴┘   ┴ └─┘└─┘ ┴   ┴─┘└─┘└─┘┴ ┴┴─┘┴─┘┴ 
-test_local_tmp_install:
+test_local_tmp_install_python_2:
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
 	mkdir -p /tmp/lib/python2.7/site-packages/
 	cd /tmp/ && PYTHONPATH=/tmp/lib/python2.7/site-packages python setup.py install --prefix=/tmp
 	cd /tmp/ && echo "import hoverpy;hoverpy.quick_test()" | PYTHONPATH=/tmp/lib/python2.7/site-packages python
+	rm -rf /tmp/hover*
+	rm -rf /tmp/lib
+
+test_local_tmp_install_python_3:
+	rm -rf /tmp/hover*
+	rm -rf /tmp/lib
+	mkdir -p /tmp/lib/python3/site-packages/
+	PYTHONPATH=/tmp/lib/python3/site-packages python3 setup.py install --prefix=/tmp
+	cd /tmp/ && echo "import hoverpy;hoverpy.quick_test()" | PYTHONPATH=/tmp/lib/python3/site-packages python
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
 
@@ -55,7 +64,7 @@ test:
 	python setup.py test
 
 docs:
-	python setup.py generateDocs
+	python hoverpy/generateDocs.py
 
 ### -------------------------------------------------------------------------------
 ## You'll need to save this into your ~/.pypirc if you'd like to push this to pypi
