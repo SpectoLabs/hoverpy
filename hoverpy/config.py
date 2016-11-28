@@ -22,7 +22,7 @@ dist = getOS()+"_"+getArch()
 
 dirName = os.path.dirname(os.path.abspath(__file__))
 
-version = '0.1.2'
+version = '0.1.3'
 dist_version = '0.9.0'
 hoverflyDirectory = os.path.join(os.path.expanduser("~"), ".hoverfly", "bin", "dist_v"+dist_version, getOS()+"_"+getArch(),)
 hoverflyPath = os.path.join(hoverflyDirectory, "hoverfly")
