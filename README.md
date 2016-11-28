@@ -11,7 +11,7 @@ Hoverfly is a lightweight, open source service virtualization tool. Using Hoverf
 If you plan on trying out the examples:
 
 ```bash
-git clone https://github.com/shyal/hoverpy.git
+git clone https://github.com/SpectoLabs/hoverpy.git
 cd hoverpy
 python setup.py test
 
