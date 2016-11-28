@@ -8,11 +8,7 @@ Hoverfly is a lightweight, open source service virtualization tool. Using Hoverf
 
 ## Installation
 
-```bash
-pip install --user -i https://testpypi.python.org/pypi hoverpy
-```
-
-Else you can pull from this repo:
+If you plan on trying out the examples:
 
 ```bash
 git clone https://github.com/shyal/hoverpy.git
@@ -21,6 +17,12 @@ python setup.py test
 
 # please note, this is not required for running the examples!
 sudo python setup.py install
+```
+
+Or whether you just want to install it:
+
+```bash
+pip install --user -i https://testpypi.python.org/pypi hoverpy
 ```
 
 ## Examples
