@@ -19,7 +19,7 @@ python setup.py test
 # sudo python setup.py install
 ```
 
-Or whether you just want to install it:
+Or whether you just want to install it using pip (not yet recommended):
 
 ```bash
 pip install --user -i https://testpypi.python.org/pypi hoverpy
