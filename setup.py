@@ -19,4 +19,5 @@ setup(
   keywords = ['testing', 'rest', 'caching', 'ci'],
   test_suite = 'hoverpy.tests.get_suite',
   classifiers = [],
+  package_data={'hoverpy': ['cert.pem']}
 )
