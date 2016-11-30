@@ -77,8 +77,24 @@ class HoverPy:
     logging.debug("starting")
     FNULL = open(os.devnull, 'w')
     self._process = Popen([hoverfly]+self._flags, stdout=FNULL, stderr=subprocess.STDOUT)
+    start = time.time()
+
+    while time.time() - start < 1:
+      try:
+        url = "http://%s:%i/api/health" % (self._host, self._adminPort)
+        r = session().get(url)
+        j = r.json()
+        up = "message" in j and "healthy" in j["message"]
+        if up:
+          break
+        else:
+          time.sleep(1/100.0)
+      except:
+        # wait 10 ms before trying again
+        time.sleep(1/100.0)
+        pass
+
     logging.debug("has pid %i" % self._process.pid)
-    time.sleep(0.3)
     return self._process
 
   def stop(self):
