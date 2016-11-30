@@ -1,7 +1,7 @@
 # In this example, we'll take a look at writing unit tests that use HoverPy.
 # Please note that doing so means that you, as a developer, can be entirely sure
 # that you are testing your code against known data. This makes you hermetic to
-# to issues with third party APIs. Let's begin by importing hoverpy.
+# issues with third party APIs. Let's begin by importing hoverpy.
 
 import hoverpy
 
@@ -9,7 +9,7 @@ import hoverpy
 # `hoverpy.TestCase`
 class TestRTD(hoverpy.TestCase):
 
-# if our test, we'll once again download a load of readthedocs pages
+# in our test, we'll once again download a load of readthedocs pages
     def test_rtd_links(self):
         import requests
         limit = 50
@@ -32,7 +32,7 @@ if __name__ == '__main__':
 # `$ env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py`<br><br>
 # which sets HoverPy in capture mode, and creates our all important `requests.db`.
 # This process may take around 10 seconds depending on your internet speed.
-# Now when we're rerun our unit tests, we'll always be running them against the
-# data we captured.<br><br>
+# Now when we rerun our unit tests, we're always running against the
+# data we captured in `requests.db`.<br><br>
 # `$ python examples/unittesting/unittesting.py`<br><br>
-# This time we are done in around 100ms.
+# This time we are done in around 100ms! Not to mention: no more unnecessary breakages.
