@@ -29,3 +29,12 @@ python examples/modify/modify.py
 ```
 
 Demonstrations how to modify requests. This is particularly useful for sending curved balls to your applications, and make sure they deal with them correctly.
+
+## unittesting
+
+```bash
+env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py
+python examples/unittesting/unittesting.py
+```
+
+Demonstrates how to use the `hoverpy.TestCase` class for unit testing purposes.

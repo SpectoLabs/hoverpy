@@ -6,7 +6,8 @@ examples = [
   "examples/delays/delays.py",
   "examples/basic/basic.py",
   "examples/modify/modify.py",
-  "examples/readthedocs/readthedocs.py"
+  "examples/readthedocs/readthedocs.py",
+  "examples/unittesting/unittesting.py",
 ]
 
 for example in examples:
