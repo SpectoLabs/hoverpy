@@ -24,10 +24,6 @@ patch_tag: semver_patch tag
 
 tag: do_tag push_tags
 
-# ╦┌┐┌┌─┐┌┬┐┌─┐┬  ┬    ┬  ┌─┐┌┬┐┌─┐┌─┐┌┬┐  ┌┬┐┌─┐┌─┐┌┬┐  ┌┐ ┬ ┬┬┬  ┌┬┐  ┌─┐┬─┐┌─┐┌┬┐  ┌─┐┬┌─┐
-# ║│││└─┐ │ ├─┤│  │    │  ├─┤ │ ├┤ └─┐ │    │ ├┤ └─┐ │   ├┴┐│ │││   ││  ├┤ ├┬┘│ ││││  ├─┘│├─┘
-# ╩┘└┘└─┘ ┴ ┴ ┴┴─┘┴─┘  ┴─┘┴ ┴ ┴ └─┘└─┘ ┴    ┴ └─┘└─┘ ┴   └─┘└─┘┴┴─┘─┴┘  └  ┴└─└─┘┴ ┴  ┴  ┴┴  
-# If you didn't do anything bad, then you'l see SUCCESS at the end
 test_install_from_pip:
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
@@ -36,9 +32,6 @@ test_install_from_pip:
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
 
-# ┌┐ ┬ ┬┬┬  ┌┬┐  ┌─┐┌┐┌┌┬┐  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┌─┐┌─┐┌─┐┬  ┬ ┬ ┬
-# ├┴┐│ │││   ││  ├─┤│││ ││   │ ├┤ └─┐ │   │  │ ││  ├─┤│  │ └┬┘
-# └─┘└─┘┴┴─┘─┴┘  ┴ ┴┘└┘─┴┘   ┴ └─┘└─┘ ┴   ┴─┘└─┘└─┘┴ ┴┴─┘┴─┘┴ 
 test_local_tmp_install_python_2:
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
@@ -57,9 +50,6 @@ test_local_tmp_install_python_3:
 	rm -rf /tmp/hover*
 	rm -rf /tmp/lib
 
-# ╦═╗╦ ╦╔╗╔  ╔╦╗╔═╗╔═╗╔╦╗╔═╗
-# ╠╦╝║ ║║║║   ║ ║╣ ╚═╗ ║ ╚═╗
-# ╩╚═╚═╝╝╚╝   ╩ ╚═╝╚═╝ ╩ ╚═╝
 test:
 	python setup.py test
 
@@ -117,4 +107,5 @@ semver_patch:
 	rm setup.py.bak hoverpy/config.py.bak
 
 clean:
-	rm -rf build dist hoverpy.egg-info /tmp/hover* /tmp/lib
+	rm -rf build dist hoverpy.egg-info /tmp/hover* /tmp/lib .eggs hoverpy/__pycache__
+	rm -f `find . -name "hoverfly.log"`

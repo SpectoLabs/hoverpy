@@ -7,13 +7,16 @@ import hoverpy
 
 # Instead of inheriting off `unittest.TestCase` let's inherit off
 # `hoverpy.TestCase`
+
+
 class TestRTD(hoverpy.TestCase):
 
-# in our test, we'll once again download a load of readthedocs pages
+    # in our test, we'll once again download a load of readthedocs pages
     def test_rtd_links(self):
         import requests
         limit = 50
-        sites = requests.get("http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
+        sites = requests.get(
+            "http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
         objects = sites.json()['objects']
         links = ["http://readthedocs.org" + x['resource_uri'] for x in objects]
         self.assertTrue(len(links) == limit)
@@ -35,4 +38,5 @@ if __name__ == '__main__':
 # Now when we rerun our unit tests, we're always running against the
 # data we captured in `requests.db`.<br><br>
 # `$ python examples/unittesting/unittesting.py`<br><br>
-# This time we are done in around 100ms! Not to mention: no more unnecessary breakages.
+# This time we are done in around 100ms! Not to mention: no more
+# unnecessary breakages.

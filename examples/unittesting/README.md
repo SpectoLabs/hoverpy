@@ -9,16 +9,12 @@ Instead of inheriting off `unittest.TestCase` let's inherit off `hoverpy.TestCas
 
 ```python
 class TestRTD(hoverpy.TestCase):
-
-```
-
-In our test, we'll once again download a load of readthedocs pages 
-
-```python
+    # in our test, we'll once again download a load of readthedocs pages
     def test_rtd_links(self):
         import requests
         limit = 50
-        sites = requests.get("http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
+        sites = requests.get(
+            "http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
         objects = sites.json()['objects']
         links = ["http://readthedocs.org" + x['resource_uri'] for x in objects]
         self.assertTrue(len(links) == limit)
@@ -38,4 +34,4 @@ if __name__ == '__main__':
 
 ```
 
-<hr> Now the correct way of launching this script the first time is: <br><br> `$ env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py`<br><br> which sets HoverPy in capture mode, and creates our all important `requests.db`. This process may take around 10 seconds depending on your internet speed. Now when we rerun our unit tests, we're always running against the data we captured in `requests.db`.<br><br> `$ python examples/unittesting/unittesting.py`<br><br> This time we are done in around 100ms 
+<hr> Now the correct way of launching this script the first time is: <br><br> `$ env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py`<br><br> which sets HoverPy in capture mode, and creates our all important `requests.db`. This process may take around 10 seconds depending on your internet speed. Now when we rerun our unit tests, we're always running against the data we captured in `requests.db`.<br><br> `$ python examples/unittesting/unittesting.py`<br><br> This time we are done in around 100ms! Not to mention: no more unnecessary breakages. 

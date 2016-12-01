@@ -8,6 +8,7 @@ import random
 logging.basicConfig(filename='middleware.log', level=logging.DEBUG)
 logging.debug('Middleware "modify_request" called')
 
+
 def main():
     data = sys.stdin.readlines()
     # this is a json string in one line so we are interested in that one line
@@ -18,8 +19,8 @@ def main():
 
     payload_dict = json.loads(payload)
 
-    payload_dict['response']['status'] = random.choice([200,201])
-    
+    payload_dict['response']['status'] = random.choice([200, 201])
+
     if random.choice([True, False]):
         payload_dict['response']['body'] = "{}"
 

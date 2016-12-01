@@ -9,26 +9,36 @@ import random
 hp = HoverPy(capture=True)
 
 # this function either generates a echo server url, or a md5 url
-# it is seeded so that we get the exact same requests on capture as we do on simulate
+# it is seeded so that we get the exact same requests on capture as we do
+# on simulate
+
+
 def getServiceData():
-  for i in range(10):
-    random.seed(i)
-    print(requests.get(random.choice(["http://echo.jsontest.com/i/%i"%i, "http://md5.jsontest.com/?text=%i"%i])).json())
+    for i in range(10):
+        random.seed(i)
+        print(
+            requests.get(
+                random.choice(
+                    [
+                        "http://echo.jsontest.com/i/%i" %
+                        i,
+                        "http://md5.jsontest.com/?text=%i" %
+                        i])).json())
 
 # make the requests to the desired host dependencies
 print("capturing responses from echo server\n")
 getServiceData()
 
 # There are two ways to add delays. One is to call the delays method
-# with the desired delay rules passed in as a json document 
-print(hp.delays({"data":[
-                    {
-                      "urlPattern": "md5.jsontest.com",
-                      "delay": 1000
-                    }
-                  ]
-                }
-              ))
+# with the desired delay rules passed in as a json document
+print(hp.delays({"data": [
+    {
+        "urlPattern": "md5.jsontest.com",
+        "delay": 1000
+    }
+]
+}
+))
 
 # the other more pythonic way is to call addDelay(...)
 print(hp.addDelay(urlPattern="echo.jsontest.com", delay=3000))

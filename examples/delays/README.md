@@ -24,9 +24,16 @@ This function either generates a echo server url, or a md5 url it is seeded so t
 
 ```python
 def getServiceData():
-  for i in range(10):
-    random.seed(i)
-    print(requests.get(random.choice(["http://echo.jsontest.com/i/%i"%i, "http://md5.jsontest.com/?text=%i"%i])).json())
+    for i in range(10):
+        random.seed(i)
+        print(
+            requests.get(
+                random.choice(
+                    [
+                        "http://echo.jsontest.com/i/%i" %
+                        i,
+                        "http://md5.jsontest.com/?text=%i" %
+                        i])).json())
 
 ```
 
@@ -38,17 +45,17 @@ getServiceData()
 
 ```
 
-There are two ways to add delays. One is to call the delays method with the desired delay rules passed in as a json document  
+There are two ways to add delays. One is to call the delays method with the desired delay rules passed in as a json document 
 
 ```python
-print(hp.delays({"data":[
-                    {
-                      "urlPattern": "md5.jsontest.com",
-                      "delay": 1000
-                    }
-                  ]
-                }
-              ))
+print(hp.delays({"data": [
+    {
+        "urlPattern": "md5.jsontest.com",
+        "delay": 1000
+    }
+]
+}
+))
 
 ```
 
@@ -70,7 +77,7 @@ Make the requests. This time HoverFly adds the simulated delays. these requests 
 
 ```python
 print("\nreplaying delayed responses from echo server\n")
-getServiceData(
+getServiceData()
 
 ```
 

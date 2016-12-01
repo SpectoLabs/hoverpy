@@ -15,7 +15,11 @@ import requests
 Create our HoverPy object with modify and middleware enabled. please note this brings in ```python examples/modify/modify_payload.py``` which will get run on every request 
 
 ```python
-hoverpy = HoverPy(flags=["-modify", "-middleware", "python examples/modify/modify_payload.py"])
+hoverpy = HoverPy(
+    flags=[
+        "-modify",
+        "-middleware",
+        "python examples/modify/modify_payload.py"])
 
 ```
 
@@ -23,11 +27,13 @@ Our middleware is designed to random return an empty body instead of what it's s
 
 ```python
 for i in range(30):
-  r = requests.get("http://time.jsontest.com")
-  if "time" in r.json().keys():
-    print("response successfully modified, current date is "+r.json()["time"])
-  else:
-    print("something went wrong - deal with it gracefully")
+    r = requests.get("http://time.jsontest.com")
+    if "time" in r.json().keys():
+        print(
+            "response successfully modified, current date is " +
+            r.json()["time"])
+    else:
+        print("something went wrong - deal with it gracefully")
 
 ```
 
