@@ -53,8 +53,9 @@ test_local_tmp_install_python_3:
 test:
 	python setup.py test
 
-docs:
+docs: .PHONY
 	python hoverpy/generateDocs.py
+	make -f docs/makefile
 
 ### -------------------------------------------------------------------------------
 ## You'll need to save this into your ~/.pypirc if you'd like to push this to pypi
@@ -104,7 +105,8 @@ semver_patch:
 	semver `head -1 VERSION` -i patch > VERSION
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ setup.py
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ hoverpy/config.py
-	rm setup.py.bak hoverpy/config.py.bak
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/source/conf.py
+	rm -f `find . -name '*.bak'`
 
 clean:
 	rm -rf build dist hoverpy.egg-info /tmp/hover* /tmp/lib .eggs hoverpy/__pycache__
