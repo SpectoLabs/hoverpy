@@ -29,6 +29,8 @@ If/when the service you are testing against changes its API, then you can simply
 HoverPy works great with the following HTTP clients:
 
 - requests
+- urllib2
+- urllib3
 - TBD
 
 ### License

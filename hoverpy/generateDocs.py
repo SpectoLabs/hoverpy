@@ -10,6 +10,8 @@ def gen():
         "examples/modify/modify.py",
         "examples/readthedocs/readthedocs.py",
         "examples/unittesting/unittesting.py",
+        "examples/urllib2eg/urllib2eg.py",
+        "examples/urllib3eg/urllib3eg.py",
     ]
 
     for example in examples:

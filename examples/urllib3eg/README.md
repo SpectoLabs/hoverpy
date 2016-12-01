@@ -5,13 +5,6 @@ from hoverpy import HoverPy
 
 ```
 
-Import requests for http 
-
-```python
-import requests
-
-```
-
 Create our HoverPy object in capture mode 
 
 ```python
@@ -19,10 +12,18 @@ hp = HoverPy(capture=True)
 
 ```
 
+Import urllib3 for http, and build a proxy manager 
+
+```python
+import urllib3
+http = urllib3.proxy_from_url("http://localhost:8500/")
+
+```
+
 Print the json from our get request. Hoverpy acted as a proxy: it made the request on our behalf, captured it, and returned it to us. 
 
 ```python
-print(requests.get("http://ip.jsontest.com/myip").json())
+print(http.request('GET', 'http://ip.jsontest.com/myip').data)
 
 ```
 
@@ -36,7 +37,7 @@ hp.simulate()
 Print the json from our get request. This time the data comes from the store. 
 
 ```python
-print(requests.get("http://ip.jsontest.com/myip").json())
+print(http.request('GET', 'http://ip.jsontest.com/myip').data)
 
 ```
 

@@ -25,7 +25,8 @@ Instead of inheriting off ``unittest.TestCase`` let's inherit off
             import requests
             limit = 50
             sites = requests.get(
-                "http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
+                "http://readthedocs.org/api/v1/project/?"
+                "limit=%d&offset=0&format=json" % limit)
             objects = sites.json()['objects']
             links = ["http://readthedocs.org" + x['resource_uri'] for x in objects]
             self.assertTrue(len(links) == limit)

@@ -76,6 +76,12 @@ docs: .PHONY
 	pandoc --from=markdown --to=rst --output=docs/source/unittesting.rst examples/unittesting/README.md
 	echo '.. unittesting\n\nunittesting\n********\n\n' | cat - docs/source/unittesting.rst > temp && mv temp docs/source/unittesting.rst
 
+	pandoc --from=markdown --to=rst --output=docs/source/urllib2eg.rst examples/urllib2eg/README.md
+	echo '.. urllib2\n\nurllib2\n********\n\n' | cat - docs/source/urllib2eg.rst > temp && mv temp docs/source/urllib2eg.rst
+
+	pandoc --from=markdown --to=rst --output=docs/source/urllib3eg.rst examples/urllib3eg/README.md
+	echo '.. urllib3\n\nurllib3\n********\n\n' | cat - docs/source/urllib3eg.rst > temp && mv temp docs/source/urllib3eg.rst
+
 	cd docs; sphinx-apidoc --force -o source ../hoverpy/ ../hoverpy/tests;
 	cd docs; make html;
 

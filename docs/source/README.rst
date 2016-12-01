@@ -42,6 +42,8 @@ Support
 HoverPy works great with the following HTTP clients:
 
 -  requests
+-  urllib2
+-  urllib3
 -  TBD
 
 License

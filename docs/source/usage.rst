@@ -23,3 +23,11 @@ You may have noticed this created a ``requests.db`` inside your current director
 ----------------------------------------
 
 .. include:: modify.rst
+
+----------------------------------------
+
+.. include:: urllib2eg.rst
+
+----------------------------------------
+
+.. include:: urllib3eg.rst
