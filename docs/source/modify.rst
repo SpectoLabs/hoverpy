@@ -4,7 +4,9 @@ modify
 ********
 
 
-Import hoverpy's main class: HoverPy
+Demonstrates how to modify requests. This is particularly useful for
+sending curved balls to your applications, and make sure they deal with
+them correctly. import hoverpy's main class: HoverPy
 
 .. code:: python
 

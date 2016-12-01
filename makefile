@@ -62,7 +62,7 @@ docs: .PHONY
 	pandoc --from=markdown --to=rst --output=docs/source/README.rst README.md
 
 	pandoc --from=markdown --to=rst --output=docs/source/basic.rst examples/basic/README.md
-	echo '.. basic\n\nBasic\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
+	echo '.. basic\n\nbasic\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
 
 	pandoc --from=markdown --to=rst --output=docs/source/readthedocs.rst examples/readthedocs/README.md
 	echo '.. readthedocs\n\nreadthedocs\n********\n\n' | cat - docs/source/readthedocs.rst > temp && mv temp docs/source/readthedocs.rst

@@ -4,7 +4,8 @@ delays
 ********
 
 
-Import hoverpy's main class: HoverPy
+Demonstrates how to add latency to calls, based on host, and method
+type. import hoverpy's main class: HoverPy
 
 .. code:: python
 

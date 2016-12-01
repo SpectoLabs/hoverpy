@@ -4,7 +4,10 @@ readthedocs
 ********
 
 
-Import hoverpy's main class: HoverPy
+Slightly more advanced example, where we query readthedocs.io for
+articles, get these articles. The program can be run in capture or
+simulate mode, and the functionality is timed. import hoverpy's main
+class: HoverPy
 
 .. code:: python
 

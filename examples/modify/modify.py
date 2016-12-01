@@ -1,3 +1,5 @@
+# Demonstrates how to modify requests. This is particularly useful for sending curved
+# balls to your applications, and make sure they deal with them correctly.
 # import hoverpy's main class: HoverPy
 from hoverpy import HoverPy
 

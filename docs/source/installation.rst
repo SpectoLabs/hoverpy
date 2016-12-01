@@ -1,7 +1,7 @@
 .. installation
 
 Installation
-------------
+============
 
 If you plan on trying out the examples:
 
