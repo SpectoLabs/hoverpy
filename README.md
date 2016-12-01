@@ -1,10 +1,14 @@
 [![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://testpypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/pip/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)[![Build Status](https://travis-ci.org/SpectoLabs/hoverpy.svg?branch=master)](https://travis-ci.org/SpectoLabs/hoverpy)
 
-![logo](https://github.com/SpectoLabs/hoverpy/raw/master/docs/source/hoverpy_logo.png)
+![](https://github.com/SpectoLabs/hoverpy/raw/master/docs/source/hoverpy_logo.png)
 
 ### Documentation
 
 https://hoverpy.readthedocs.io/
+
+### Source
+
+https://github.com/SpectoLabs/hoverpy/
 
 ### Motivation
 

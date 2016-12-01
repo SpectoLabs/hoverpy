@@ -32,7 +32,8 @@ def getLinks(hp, limit):
     print("\nGetting links in %s mode!\n" % hp.mode())
     start = time.time()
     sites = requests.get(
-        "http://readthedocs.org/api/v1/project/?limit=%d&offset=0&format=json" % limit)
+        "http://readthedocs.org/api/v1/project/?limit="
+        "%d&offset=0&format=json" % int(limit))
     objects = sites.json()['objects']
     links = ["http://readthedocs.org" + x['resource_uri'] for x in objects]
     for link in links:

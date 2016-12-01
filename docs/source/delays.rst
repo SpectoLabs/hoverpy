@@ -1,6 +1,6 @@
 .. delays
 
-delays Example
+delays
 ********
 
 
