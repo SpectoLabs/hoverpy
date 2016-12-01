@@ -9,3 +9,4 @@ requests.db
 /hoverpy.egg-info
 /dist
 /bin
+/docs/build

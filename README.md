@@ -1,5 +1,7 @@
 # hoverpy
 
+[![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://testpypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/pip/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)
+
 Hoverpy is a Python library that enables you to transparently use [HoverFly](https://github.com/SpectoLabs/hoverfly) in your python applications.
 
 Hoverfly is a lightweight, open source service virtualization tool. Using Hoverfly, you can virtualize your application dependencies to create a self-contained development or test environment.
