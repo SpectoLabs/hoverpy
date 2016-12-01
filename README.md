@@ -2,8 +2,6 @@
 
 ![logo](https://github.com/SpectoLabs/hoverpy/raw/master/docs/source/hoverpy_logo.png)
 
-This is a Python binding to HoverPy, a very high performance dependency injection library written in Go.
-
 ### Documentation
 
 https://hoverpy.readthedocs.io/
