@@ -1,6 +1,6 @@
 # hoverpy
 
-[![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://testpypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/pip/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)
+[![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://testpypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/pip/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)[![Build Status](https://travis-ci.org/SpectoLabs/hoverpy.svg?branch=master)](https://travis-ci.org/SpectoLabs/hoverpy)
 
 Hoverpy is a Python library that enables you to transparently use [HoverFly](https://github.com/SpectoLabs/hoverfly) in your python applications.
 
