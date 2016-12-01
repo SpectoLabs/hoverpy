@@ -7,6 +7,7 @@ HoverPy
 * :ref:`modindex`
 * :ref:`search`
 
+
 Hoverpy is a Python library that enables you to transparently use
 `HoverFly <https://github.com/SpectoLabs/hoverfly>`__ in your python
 applications.
@@ -47,7 +48,16 @@ Test
 Examples
 --------
 
-`basic <examples/basic>`__
+.. toctree::
+   :maxdepth: 1
+
+   basic.rst
+   readthedocs.rst
+   modify.rst
+   delays.rst
+   unittesting.rst
+
+`basic <basic.html>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -57,7 +67,7 @@ Examples
 This is the most basic example possible. Captures one request, and
 replays it.
 
-`readthedocs <examples/readthedocs>`__
+`readthedocs <readthedocs.html>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -68,7 +78,7 @@ Slightly more advanced example, where we query readthedocs.io for
 articles, get these articles. The program can be run in capture or
 simulate mode, and the functionality is timed.
 
-`delays <examples/delays>`__
+`delays <delays.html>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -78,7 +88,7 @@ simulate mode, and the functionality is timed.
 Demonstrates how to add latency to calls, based on host, and method
 type.
 
-`modify <examples/modify>`__
+`modify <modify.html>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash
@@ -89,7 +99,7 @@ Demonstrations how to modify requests. This is particularly useful for
 sending curved balls to your applications, and make sure they deal with
 them correctly.
 
-`unittesting <examples/unittesting>`__
+`unittesting <unittesting.html>`__
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. code:: bash

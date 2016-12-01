@@ -11,6 +11,9 @@ VERSION=$(shell head -1 VERSION)
 
 # Commands from most to least significant
 
+all: 
+	python setup.py build
+
 # ┬─┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐  ┌─┐┌─┐┌┬┐┌─┐┬ ┬  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┬┌─┐┬─┐┌─┐┬┌─┐┌┐┌
 # ├┬┘├┤ │  ├┤ ├─┤└─┐├┤   ├─┘├─┤ │ │  ├─┤   │ ├┤ └─┐ │   └┐┌┘├┤ ├┬┘└─┐││ ││││
 # ┴└─└─┘┴─┘└─┘┴ ┴└─┘└─┘  ┴  ┴ ┴ ┴ └─┘┴ ┴   ┴ └─┘└─┘ ┴    └┘ └─┘┴└─└─┘┴└─┘┘└┘
@@ -55,7 +58,24 @@ test:
 
 docs: .PHONY
 	python hoverpy/generateDocs.py
-	make -f docs/makefile
+
+	pandoc --from=markdown --to=rst --output=docs/source/basic.rst examples/basic/README.md
+	echo '.. basic\n\nBasic Example\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
+
+	pandoc --from=markdown --to=rst --output=docs/source/readthedocs.rst examples/readthedocs/README.md
+	echo '.. readthedocs\n\nreadthedocs Example\n********\n\n' | cat - docs/source/readthedocs.rst > temp && mv temp docs/source/readthedocs.rst
+
+	pandoc --from=markdown --to=rst --output=docs/source/modify.rst examples/modify/README.md
+	echo '.. modify\n\nmodify Example\n********\n\n' | cat - docs/source/modify.rst > temp && mv temp docs/source/modify.rst
+
+	pandoc --from=markdown --to=rst --output=docs/source/delays.rst examples/delays/README.md
+	echo '.. delays\n\ndelays Example\n********\n\n' | cat - docs/source/delays.rst > temp && mv temp docs/source/delays.rst
+
+	pandoc --from=markdown --to=rst --output=docs/source/unittesting.rst examples/unittesting/README.md
+	echo '.. unittesting\n\nunittesting Example\n********\n\n' | cat - docs/source/unittesting.rst > temp && mv temp docs/source/unittesting.rst
+
+	cd docs; sphinx-apidoc --force -o source ../hoverpy/ ../hoverpy/tests;
+	cd docs; make html;
 
 ### -------------------------------------------------------------------------------
 ## You'll need to save this into your ~/.pypirc if you'd like to push this to pypi
@@ -78,9 +98,6 @@ docs: .PHONY
 ### ------------------------------------
 ### ------------------------------------
 ## Probably nothing interesting below
-
-build: .PHONY
-	python setup.py build
 
 register_test:
 	python setup.py register -r pypitest
@@ -111,3 +128,4 @@ semver_patch:
 clean:
 	rm -rf build dist hoverpy.egg-info /tmp/hover* /tmp/lib .eggs hoverpy/__pycache__
 	rm -f `find . -name "hoverfly.log"`
+	cd docs; make clean
