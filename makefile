@@ -136,4 +136,5 @@ semver_patch:
 clean:
 	rm -rf build dist hoverpy.egg-info /tmp/hover* /tmp/lib .eggs hoverpy/__pycache__
 	rm -f `find . -name "hoverfly.log"`
+	rm -rf `find . -name '__pycache__'`
 	cd docs; make clean

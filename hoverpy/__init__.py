@@ -35,13 +35,15 @@ class HoverPy:
     _adminPort = None
     _host = ""
     _process = None
+    _inMemory = False
     _flags = []
 
     def __init__(self, host="localhost", capture=False,
-                 proxyPort=8500, adminPort=8888, flags=[]):
+                 proxyPort=8500, adminPort=8888, inMemory=False, flags=[]):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
         self._host = host
+        self._inMemory = inMemory
         self._flags = flags
         if capture:
             self._flags.append("--capture")
@@ -84,6 +86,9 @@ class HoverPy:
     def start(self):
         logging.debug("starting")
         FNULL = open(os.devnull, 'w')
+        flags = self._flags
+        if self._inMemory:
+            flags += ["-db", "memory"]
         self._process = Popen(
             [hoverfly] +
             self._flags,
