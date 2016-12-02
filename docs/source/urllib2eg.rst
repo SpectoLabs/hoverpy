@@ -1,55 +1,57 @@
-.. urllib2
+.. _urllib2eg
 
-urllib2
-********
+=========
+urllib2eg
+=========
+
+Import hoverpy's main class: HoverPy 
+
+::
+
+>>> from hoverpy import HoverPy
 
 
-Import hoverpy's main class: HoverPy
+Create our HoverPy object in capture mode 
 
-.. code:: python
+::
 
-    from hoverpy import HoverPy
+>>> with HoverPy(capture=True) as hp:
 
-Create our HoverPy object in capture mode
 
-.. code:: python
+Import urllib2 for http 
 
-    hp = HoverPy(capture=True)
+::
 
-Import urllib2 for http
+>>>     import urllib2
 
-.. code:: python
 
-    import urllib2
+Build our proxy handler for urllib2. This is currently a rather crude method of initialising urllib2, and this code will be incorporated into the main library shortly. 
 
-Build our proxy handler for urllib2. This is currently a rather crude
-method of initialising urllib2, and this code will be incorporated into
-the main library shortly.
+::
 
-.. code:: python
+>>>     proxy = urllib2.ProxyHandler({'http': 'localhost:8500'})
+>>>     opener = urllib2.build_opener(proxy)
+>>>     urllib2.install_opener(opener)
 
-    proxy = urllib2.ProxyHandler({'http': 'localhost:8500'})
-    opener = urllib2.build_opener(proxy)
-    urllib2.install_opener(opener)
 
-Print the json from our get request. Hoverpy acted as a proxy: it made
-the request on our behalf, captured it, and returned it to us.
+Print the json from our get request. Hoverpy acted as a proxy: it made the request on our behalf, captured it, and returned it to us. 
 
-.. code:: python
+::
 
-    print(urllib2.urlopen("http://ip.jsontest.com/myip").read())
+>>>     print(urllib2.urlopen("http://ip.jsontest.com/myip").read())
 
-Switch HoverPy to simulate mode. HoverPy no longer acts as a proxy; all
-it does from now on is replay the captured data.
 
-.. code:: python
+Switch HoverPy to simulate mode. HoverPy no longer acts as a proxy; all it does from now on is replay the captured data. 
 
-    hp.simulate()
+::
 
-Print the json from our get request. This time the data comes from the
-store.
+>>>     hp.simulate()
 
-.. code:: python
 
-    print(urllib2.urlopen("http://ip.jsontest.com/myip").read())
+Print the json from our get request. This time the data comes from the store. 
+
+::
+
+>>>     print(urllib2.urlopen("http://ip.jsontest.com/myip").read())
+
 

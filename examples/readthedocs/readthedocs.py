@@ -37,7 +37,6 @@ def getLinks(hp, limit):
     print("Time taken: %f" % (time.time() - start))
 
 # construct our HoverPy object in capture mode
-hp = HoverPy(capture=args.capture)
-
-# get the links from read the docs.
-getLinks(hp, args.limit)
+with HoverPy(capture=args.capture) as hp:
+    # get the links from read the docs.
+    getLinks(hp, args.limit)

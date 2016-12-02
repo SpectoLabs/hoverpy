@@ -61,28 +61,17 @@ docs: .PHONY
 
 	pandoc --from=markdown --to=rst --output=docs/source/README.rst README.md
 
-	pandoc --from=markdown --to=rst --output=docs/source/basic.rst examples/basic/README.md
-	echo '.. basic\n\nbasic\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
+	# pandoc --from=markdown --to=rst --output=docs/source/basic.rst examples/basic/README.md
+	# echo '.. basic\n\nbasic\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
 
-	pandoc --from=markdown --to=rst --output=docs/source/readthedocs.rst examples/readthedocs/README.md
-	echo '.. readthedocs\n\nreadthedocs\n********\n\n' | cat - docs/source/readthedocs.rst > temp && mv temp docs/source/readthedocs.rst
+	cp examples/basic/basic.rst docs/source/
+	cp examples/readthedocs/readthedocs.rst docs/source/
+	cp examples/modify/modify.rst docs/source/
+	cp examples/delays/delays.rst docs/source/
+	cp examples/unittesting/unittesting.rst docs/source/
+	cp examples/urllib2eg/urllib2eg.rst docs/source/
+	cp examples/urllib3eg/urllib3eg.rst docs/source/
 
-	pandoc --from=markdown --to=rst --output=docs/source/modify.rst examples/modify/README.md
-	echo '.. modify\n\nmodify\n********\n\n' | cat - docs/source/modify.rst > temp && mv temp docs/source/modify.rst
-
-	pandoc --from=markdown --to=rst --output=docs/source/delays.rst examples/delays/README.md
-	echo '.. delays\n\ndelays\n********\n\n' | cat - docs/source/delays.rst > temp && mv temp docs/source/delays.rst
-
-	pandoc --from=markdown --to=rst --output=docs/source/unittesting.rst examples/unittesting/README.md
-	echo '.. unittesting\n\nunittesting\n********\n\n' | cat - docs/source/unittesting.rst > temp && mv temp docs/source/unittesting.rst
-
-	pandoc --from=markdown --to=rst --output=docs/source/urllib2eg.rst examples/urllib2eg/README.md
-	echo '.. urllib2\n\nurllib2\n********\n\n' | cat - docs/source/urllib2eg.rst > temp && mv temp docs/source/urllib2eg.rst
-
-	pandoc --from=markdown --to=rst --output=docs/source/urllib3eg.rst examples/urllib3eg/README.md
-	echo '.. urllib3\n\nurllib3\n********\n\n' | cat - docs/source/urllib3eg.rst > temp && mv temp docs/source/urllib3eg.rst
-
-	cd docs; sphinx-apidoc --force -o source ../hoverpy/ ../hoverpy/tests;
 	cd docs; make html;
 
 ### -------------------------------------------------------------------------------

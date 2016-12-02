@@ -3,6 +3,7 @@
 
 def gen():
     import os
+    import re
 
     examples = [
         "examples/delays/delays.py",
@@ -25,11 +26,12 @@ def gen():
             if line == "":
                 continue
             assert(line)
-            lineType = "comment" if line[0] == "#" else "code"
+            lineType = "comment" if re.match("^\s*#", line) else "code"
             if lastLineType == "":
                 lastLineType = lineType
             if lineType == "comment":
-                line = line[2:]
+                print line
+                line = re.match(".*# (.*)", line).group(1)
             if lineType == lastLineType:
                 thisFar += line+"\n" if lineType == "code" else line+" "
             else:
@@ -39,15 +41,30 @@ def gen():
 
         stuff.append((lastLineType, thisFar))
 
-        p = os.path.join(os.path.dirname(example), "README.md")
+        p = os.path.join(os.path.splitext(example)[0]+".rst")
         f = open(p, "w")
         print("writing %s" % p)
-
+        bn = os.path.splitext(os.path.basename(example))[0]
+        f.write(
+            ".. _" +
+            bn +
+            "\n\n" +
+            len(bn) *
+            "=" +
+            "\n" +
+            bn +
+            "\n" +
+            len(bn) *
+            "=" +
+            "\n\n")
         for s in stuff:
             if s[0] == "code":
-                f.write("\n\n```python\n"+s[1]+"\n```\n\n")
+                code = s[1].replace("\n", "\n>>> ")
+                code = code[:-4]
+                f.write("\n\n::\n\n>>> "+code+"\n\n")
             else:
                 f.write(s[1][0].upper() + s[1][1:])
+
 
 if __name__ == "__main__":
     gen()
