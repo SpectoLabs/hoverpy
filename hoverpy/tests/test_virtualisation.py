@@ -1,4 +1,4 @@
-import basetestcase
+from . import basetestcase
 import requests
 import unittest
 from hoverpy import HoverPy
