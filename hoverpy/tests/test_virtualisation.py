@@ -1,24 +1,28 @@
-import unittest
+import basetestcase
 import requests
+import unittest
 from hoverpy import HoverPy
+import logging
 
 
-class TestVirt(unittest.TestCase):
+class TestVirt(basetestcase.BaseTestCase):
 
     def test_capture(self):
-        hoverpy = HoverPy(capture=True, inMemory=True)
-        r = requests.get("http://localhost:8888/api/v2/hoverfly")
-        self.assertIn('destination', r.json())
+        logging.debug("test_capture")
+        with HoverPy(capture=True):
+            r = requests.get("http://localhost:8888/api/v2/hoverfly")
+            self.assertIn('destination', r.json())
 
     def test_playback(self):
-        hoverpy = HoverPy(capture=True, inMemory=True)
-        r = requests.get("http://localhost:8888/api/v2/hoverfly")
-        self.assertIn('destination', r.json())
+        logging.debug("test_playback")
+        with HoverPy(capture=True) as hoverpy:
+            r = requests.get("http://localhost:8888/api/v2/hoverfly")
+            self.assertIn('destination', r.json())
 
-        hoverpy.simulate()
+            hoverpy.simulate()
 
-        r = requests.get("http://localhost:8888/api/v2/hoverfly")
-        self.assertIn('destination', r.json())
+            r = requests.get("http://localhost:8888/api/v2/hoverfly")
+            self.assertIn('destination', r.json())
 
 if __name__ == '__main__':
     unittest.main()

@@ -31,28 +31,32 @@ def session():
 
 class HoverPy:
 
-    _proxyPort = None
-    _adminPort = None
-    _host = ""
-    _process = None
-    _inMemory = False
-    _flags = []
-
     def __init__(self, host="localhost", capture=False,
-                 proxyPort=8500, adminPort=8888, inMemory=False, flags=[]):
+                 proxyPort=8500, adminPort=8888, inMemory=False,
+                 modify=False, middleware=""):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
         self._host = host
         self._inMemory = inMemory
-        self._flags = flags
+        self._modify = modify
+        self._middleware = middleware
+        self._flags = []
         if capture:
-            self._flags.append("--capture")
+            self._flags.append("-capture")
+
         self.enableProxy()
         self.start()
 
     def __del__(self):
         if self._process:
             self.stop()
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        if self._process:
+            self.stop()
+
+    def __enter__(self):
+        return self
 
     def wipe(self):
         try:
@@ -82,20 +86,23 @@ class HoverPy:
 
     def disableProxy(self):
         del os.environ['HTTP_PROXY']
+        del os.environ['HTTPS_PROXY']
 
     def start(self):
-        logging.debug("starting")
+        logging.debug("starting %i" % id(self))
         FNULL = open(os.devnull, 'w')
-        flags = self._flags
         if self._inMemory:
-            flags += ["-db", "memory"]
+            self._flags += ["-db", "memory"]
+        if self._modify:
+            assert(self._middleware)
+            self._flags += ["-modify", "-middleware", self._middleware]
+        logging.debug("flags:" + str(self._flags))
         self._process = Popen(
             [hoverfly] +
             self._flags,
             stdout=FNULL,
             stderr=subprocess.STDOUT)
         start = time.time()
-
         while time.time() - start < 1:
             try:
                 url = "http://%s:%i/api/health" % (self._host, self._adminPort)
@@ -103,7 +110,8 @@ class HoverPy:
                 j = r.json()
                 up = "message" in j and "healthy" in j["message"]
                 if up:
-                    break
+                    logging.debug("has pid %i" % self._process.pid)
+                    return self._process
                 else:
                     time.sleep(1/100.0)
             except:
@@ -111,8 +119,8 @@ class HoverPy:
                 time.sleep(1/100.0)
                 pass
 
-        logging.debug("has pid %i" % self._process.pid)
-        return self._process
+        logging.error("Could not start hoverfly!")
+        raise ValueError("Could not start hoverfly!")
 
     def stop(self):
         if logging:

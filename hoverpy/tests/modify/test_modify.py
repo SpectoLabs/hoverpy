@@ -1,22 +1,18 @@
 import unittest
-import json
 from hoverpy import HoverPy
-import os
-import time
 import requests
+import logging
+from .. import basetestcase
 
-
-class TestModify(unittest.TestCase):
+class TestModify(basetestcase.BaseTestCase):
 
     def testModify(self):
-        # Todo: This should use proper arguments, not the flags argument
-        hoverpy = HoverPy(
-            flags=[
-                "-modify",
-                "-middleware",
-                "python tests/modify/modify.py"])
-        r = requests.get("http://example.com")
-        self.assertIn("Hoverfly", r.text)
+        logging.debug("testModify")
+        with HoverPy(
+                modify=True,
+                middleware="python tests/modify/modify.py"):
+            r = requests.get("http://example.com")
+            self.assertIn("Hoverfly", r.text)
 
 if __name__ == '__main__':
     unittest.main()

@@ -10,3 +10,4 @@ requests.db
 /dist
 /bin
 /docs/build
+.idea
