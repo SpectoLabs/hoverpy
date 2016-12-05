@@ -64,6 +64,7 @@ docs: .PHONY
 	mv examples/basic/basic.rst docs/source/
 	mv examples/readthedocs/readthedocs.rst docs/source/
 	mv examples/modify/modify.rst docs/source/
+	mv examples/modify/modify_payload.rst docs/source/
 	mv examples/delays/delays.rst docs/source/
 	mv examples/unittesting/unittesting.rst docs/source/
 	mv examples/urllib2eg/urllib2eg.rst docs/source/

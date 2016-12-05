@@ -9,6 +9,7 @@ def gen():
         "examples/delays/delays.py",
         "examples/basic/basic.py",
         "examples/modify/modify.py",
+        "examples/modify/modify_payload.py",
         "examples/readthedocs/readthedocs.py",
         "examples/unittesting/unittesting.py",
         "examples/urllib2eg/urllib2eg.py",
@@ -26,7 +27,7 @@ def gen():
             if line == "":
                 continue
             assert(line)
-            lineType = "comment" if re.match("^\s*#", line) else "code"
+            lineType = "comment" if re.match("^\s*# ", line) else "code"
             if lastLineType == "":
                 lastLineType = lineType
             if lineType == "comment":
