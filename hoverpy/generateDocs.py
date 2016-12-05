@@ -30,7 +30,6 @@ def gen():
             if lastLineType == "":
                 lastLineType = lineType
             if lineType == "comment":
-                print line
                 line = re.match(".*# (.*)", line).group(1)
             if lineType == lastLineType:
                 thisFar += line+"\n" if lineType == "code" else line+" "
@@ -46,7 +45,7 @@ def gen():
         print("writing %s" % p)
         bn = os.path.splitext(os.path.basename(example))[0]
         f.write(
-            ".. _" +
+            ".. " +
             bn +
             "\n\n" +
             len(bn) *
@@ -63,7 +62,13 @@ def gen():
                 code = code[:-4]
                 f.write("\n\n::\n\n>>> "+code+"\n\n")
             else:
-                f.write(s[1][0].upper() + s[1][1:])
+                text = s[1]
+                if text[0] == " ":
+                    text = text[1:]
+                text = text[0].upper() + text[1:]
+                text = text.replace("<br> ", "\n")
+                text = text.replace("<br>", "\n")
+                f.write(text)
 
 
 if __name__ == "__main__":

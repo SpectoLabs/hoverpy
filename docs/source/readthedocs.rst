@@ -1,4 +1,4 @@
-.. _readthedocs
+.. readthedocs
 
 ===========
 readthedocs

@@ -1,4 +1,4 @@
-.. _delays
+.. delays
 
 ======
 delays

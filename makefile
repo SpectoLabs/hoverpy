@@ -61,17 +61,16 @@ docs: .PHONY
 
 	pandoc --from=markdown --to=rst --output=docs/source/README.rst README.md
 
-	# pandoc --from=markdown --to=rst --output=docs/source/basic.rst examples/basic/README.md
-	# echo '.. basic\n\nbasic\n********\n\n' | cat - docs/source/basic.rst > temp && mv temp docs/source/basic.rst
-
-	cp examples/basic/basic.rst docs/source/
-	cp examples/readthedocs/readthedocs.rst docs/source/
-	cp examples/modify/modify.rst docs/source/
-	cp examples/delays/delays.rst docs/source/
-	cp examples/unittesting/unittesting.rst docs/source/
-	cp examples/urllib2eg/urllib2eg.rst docs/source/
-	cp examples/urllib3eg/urllib3eg.rst docs/source/
-
+	mv examples/basic/basic.rst docs/source/
+	mv examples/readthedocs/readthedocs.rst docs/source/
+	mv examples/modify/modify.rst docs/source/
+	mv examples/delays/delays.rst docs/source/
+	mv examples/unittesting/unittesting.rst docs/source/
+	mv examples/urllib2eg/urllib2eg.rst docs/source/
+	mv examples/urllib3eg/urllib3eg.rst docs/source/
+	
+	sphinx-apidoc -o docs/source/ hoverpy
+	
 	cd docs; make html;
 
 ### -------------------------------------------------------------------------------

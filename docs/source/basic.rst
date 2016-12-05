@@ -1,4 +1,4 @@
-.. _basic
+.. basic
 
 =====
 basic
@@ -40,3 +40,7 @@ Print the json from our get request. This time the data comes from the store.
 >>>     print(requests.get("http://ip.jsontest.com/myip").json())
 
 
+Requests.db
+-----------
+
+You may have noticed this created a ``requests.db`` inside your current directory. This is a boltdb database, holding our requests, and their responses. 

@@ -1,4 +1,4 @@
-.. _modify
+.. modify
 
 ======
 modify

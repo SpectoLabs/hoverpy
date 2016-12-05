@@ -15,8 +15,4 @@ I don't know about you, but for me the best way of getting into things is by try
    urllib3eg
 
 
-requests.db
------------
-
-You may have noticed this created a ``requests.db`` inside your current directory. This is a boltdb database, holding our requests, and their responses.
 

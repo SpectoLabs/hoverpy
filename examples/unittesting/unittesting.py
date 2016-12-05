@@ -32,12 +32,12 @@ if __name__ == '__main__':
     unittest.main()
 
 
-# <hr> Now the correct way of launching this script the first time is: <br><br>
-# `$ env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py`<br><br>
-# which sets HoverPy in capture mode, and creates our all important `requests.db`.
+# Now the correct way of launching this script the first time is: <br><br>
+# ``$ env HOVERPY_CAPTURE=true python examples/unittesting/unittesting.py``<br><br>
+# which sets HoverPy in capture mode, and creates our all important ``requests.db``.
 # This process may take around 10 seconds depending on your internet speed.
 # Now when we rerun our unit tests, we're always running against the
-# data we captured in `requests.db`.<br><br>
-# `$ python examples/unittesting/unittesting.py`<br><br>
+# data we captured in ``requests.db``.<br><br>
+# ``$ python examples/unittesting/unittesting.py``<br><br>
 # This time we are done in around 100ms! Not to mention: no more
 # unnecessary breakages.

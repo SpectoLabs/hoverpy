@@ -1,4 +1,4 @@
-.. _urllib3eg
+.. urllib3eg
 
 =========
 urllib3eg
