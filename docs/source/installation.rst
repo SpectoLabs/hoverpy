@@ -11,16 +11,6 @@ We're currently in development mode, so you're better off cloning the repository
 
 .. code:: bash
 
-    $ git clone https://github.com/SpectoLabs/hoverpy.git
-    $ cd hoverpy
-
-Or using virtualenv
--------------------
-
-If you prefer using virtualenv to keep your environment clean:
-
-.. code:: bash
-
     $ virtualenv hoverpyenv
     $ cd hoverpyenv
     $ source bin/activate
@@ -30,11 +20,23 @@ If you prefer using virtualenv to keep your environment clean:
 Testing
 -------
 
-Make sure everything is working:
+Please make sure everything is working before proceeding to the next steps.
 
 .. code:: bash
 
     $ python setup.py test
+
+You should get a series of ``OKs``.
+
+`Output:`
+
+.. code:: bash
+
+    ...
+    testModify (hoverpy.tests.modify.testModify.TestModify) ... ok
+    testTemplate (hoverpy.tests.templates.testTemplates.TestTemplates) ... ok
+    testCapture (hoverpy.tests.testVirtualisation.TestVirt) ... ok
+    testPlayback (hoverpy.tests.testVirtualisation.TestVirt) ... ok
 
 Running the examples
 --------------------
@@ -45,9 +47,13 @@ Running the examples
     $ basic       delays      modify      readthedocs tornado     unittesting urllib2eg   urllib3eg
     $ python examples/basic/basic.py
 
-Please note we'll cover the examples in `usage`_ page.
+Please note we'll cover the examples in the `usage`_ page. But for the truly impatient, you can try running the most basic example, just to make sure everything's working at this point.
 
-.. _usage: usage.html
+.. _usage: usage.html 
+
+.. code:: bash
+
+    $ env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py
 
 Installing from repo
 --------------------
@@ -56,7 +62,7 @@ Please note there isn't yet much point installing HoverPy since we're currently 
 
 .. code:: bash
 
-    sudo python setup.py install
+    $ sudo python setup.py install
 
 Installing from PIP
 -------------------
@@ -65,4 +71,4 @@ You can also install HoverPy from PIP, however once again you're better off play
 
 .. code:: bash
 
-    pip install --user -i https://testpypi.python.org/pypi hoverpy
+    $ pip install --user -i https://testpypi.python.org/pypi hoverpy

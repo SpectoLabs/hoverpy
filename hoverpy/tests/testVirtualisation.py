@@ -7,13 +7,13 @@ import logging
 
 class TestVirt(basetestcase.BaseTestCase):
 
-    def test_capture(self):
+    def testCapture(self):
         logging.debug("test_capture")
         with HoverPy(capture=True):
             r = requests.get("http://localhost:8888/api/v2/hoverfly")
             self.assertIn('destination', r.json())
 
-    def test_playback(self):
+    def testPlayback(self):
         logging.debug("test_playback")
         with HoverPy(capture=True) as hoverpy:
             r = requests.get("http://localhost:8888/api/v2/hoverfly")
