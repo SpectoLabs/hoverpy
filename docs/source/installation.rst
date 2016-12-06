@@ -45,7 +45,6 @@ Running the examples
 
     $ ls examples/*
     $ basic       delays      modify      readthedocs tornado     unittesting urllib2eg   urllib3eg
-    $ python examples/basic/basic.py
 
 Please note we'll cover the examples in the `usage`_ page. But for the truly impatient, you can try running the most basic example, just to make sure everything's working at this point.
 
