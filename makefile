@@ -69,10 +69,11 @@ docs: .PHONY
 	mv examples/unittesting/unittesting.rst docs/source/
 	mv examples/urllib2eg/urllib2eg.rst docs/source/
 	mv examples/urllib3eg/urllib3eg.rst docs/source/
-	
+
 	sphinx-apidoc -o docs/source/ hoverpy
 	
 	cd docs; make html;
+#	cd docs/source/mermaid/intro; mermaid *;
 
 ### -------------------------------------------------------------------------------
 ## You'll need to save this into your ~/.pypirc if you'd like to push this to pypi
