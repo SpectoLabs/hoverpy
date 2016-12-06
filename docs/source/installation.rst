@@ -71,3 +71,13 @@ You can also install HoverPy from PIP, however once again you're better off play
 .. code:: bash
 
     $ pip install --user -i https://testpypi.python.org/pypi hoverpy
+
+HoverFly binary
+---------------
+
+Please note that when you install HoverPy, the HoverFly binaries get downloaded and installed in your home directory, in
+
+.. code:: bash
+
+    ${home}/hoverfly/bin/dist_vX.X.X/${OS}_${ARCH}/hoverfly
+

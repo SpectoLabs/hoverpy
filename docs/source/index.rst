@@ -10,6 +10,7 @@ Contents
    :maxdepth: 3
 
    installation
+   introduction
    usage
 
 ==================

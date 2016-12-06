@@ -15,7 +15,7 @@ Let's look into mutating responses using middleware. This is particularly useful
 >>>         middleware="python examples/modify/modify_payload.py") as hoverpy:
 
 
-Above we created our HoverPy object with modify and middleware enabled. Please note this brings in ```python examples/modify/modify_payload.py``` which will get run on every request. 
+Above we created our HoverPy object with modify and middleware enabled. Please note this brings in ``python examples/modify/modify_payload.py`` which will get run on every request. 
 
 ::
 
@@ -23,7 +23,7 @@ Above we created our HoverPy object with modify and middleware enabled. Please n
 >>>         r = requests.get("http://time.jsontest.com")
 
 
-Let's make 30 requests to time.jsontest.com which simply gets us the current local time 
+Let's make 30 requests to http://time.jsontest.com which simply gets us the current local time 
 
 ::
 
@@ -33,7 +33,7 @@ Let's make 30 requests to time.jsontest.com which simply gets us the current loc
 >>>                 r.json()["time"])
 
 
-Time ``time`` key is inside the response, which is what we expected. 
+The ``time`` key is inside the response, which is what we expected. 
 
 ::
 

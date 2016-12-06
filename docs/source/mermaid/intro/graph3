@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant You
+    participant HoverPy
+    participant The World
+    loop proxied
+        You->>The World: interaction
+        The World-->>You: response
+    end

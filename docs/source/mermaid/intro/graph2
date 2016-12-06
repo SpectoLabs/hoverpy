@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant You
+    participant HoverPy
+    participant HoverFly
+    participant The World
+    HoverPy-->> HoverFly: Setup
+    HoverFly-->> The World: request
+    loop every day
+        You->>HoverFly: request
+        HoverFly-->>You: response
+    end
+    The World -->> HoverFly: "if I feel like it.."

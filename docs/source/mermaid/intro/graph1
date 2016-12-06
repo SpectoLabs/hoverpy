@@ -1,0 +1,10 @@
+sequenceDiagram
+    participant You
+    participant Service Virtualisation
+    participant The World
+    Service Virtualisation-->> The World: request
+    loop every day
+        You->>Service Virtualisation: request
+        Service Virtualisation-->>You: response
+    end
+    The World -->> Service Virtualisation: "sometimes.."

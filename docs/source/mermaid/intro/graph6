@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant you
+    participant hoverpy
+    participant the world
+    loop modify.py
+        you->>the world: interaction
+        the world-->>you: response
+    end

@@ -1,0 +1,7 @@
+sequenceDiagram
+    participant You
+    participant HoverPy
+    loop synth.py
+        You->>HoverPy: interaction
+        HoverPy-->>You: response
+    end

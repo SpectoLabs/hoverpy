@@ -1,9 +1,13 @@
-# Please run this expample using <br><br>``env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py``<br><br>
 # This is by far the simplest example on how to get started with HoverPy.
-# Let's import our most important class HoverPy, along with whatever else
-# we may need
+# Please run this example using: <br><br>``$ env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py``<br><br>
+# You should see your IP address show up twice. Let's walk through the
+# code to see what's happening.
 from hoverpy import HoverPy
 import requests
+
+# Above, we start by importing our most important class `HoverPy`. We also
+# bring in ``requests`` for our http traffic.<br><br>
+# .. hoverpy: hoverpy.html#module-hoverpy<br><br>
 
 # Now let's create our HoverPy object in capture mode. We do so with a
 # `with` statement as this is the pythonic way, although this is not a necessity.

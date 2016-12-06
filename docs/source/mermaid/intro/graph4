@@ -1,0 +1,8 @@
+sequenceDiagram
+    participant You
+    participant HoverPy
+    participant The World
+    loop
+        You->>HoverPy: interaction
+        HoverPy-->>You: response
+    end
