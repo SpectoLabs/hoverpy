@@ -1,16 +1,17 @@
-# Slightly more advanced example, where we query readthedocs.io for
-# articles, get these articles. The program can be run in capture or
-# simulate mode, and the functionality is timed.
+# This is a slightly more advanced example, where we query readthedocs.io for articles. In the first phase, we run
+# the program in capture mode. This is done using the capture flag:<br><br>
+# ``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py --capture``<br><br>
+# the program can then be run again in simulate mode, in a fraction of the time:<br><br>
+# ``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py``<br><br>
 
-# import hoverpy's main class: HoverPy
+# We'll now run through the code to see what it's doing.
 from hoverpy import HoverPy
-
-# import requests for http, and time to time our code
 import requests
 import time
 
-# setup argparse. If we call our app with --capture, it captures the request. Else it plays them back.
-# The --limit flag determines how many articles we get from readthedocs.io
+# We obviously start our program by doing the usual imports. We're using
+# the ``time`` module to time our code.
+
 from argparse import ArgumentParser
 parser = ArgumentParser(description="Perform proxy testing/URL list creation")
 parser.add_argument("--capture", help="capture the data", action="store_true")
@@ -18,7 +19,10 @@ parser.add_argument(
     "--limit", default=50, help="number of links to capture / simulate")
 args = parser.parse_args()
 
-# this function requests articles from readthedocs.io.
+# As you can see, we're setting up our program with the ``--capture``
+# flag, which either sets us up in capture mode if used, or simulate mode
+# if not. The ``--limit`` flag can be used to increase the number of
+# articles we fetch, however 50 is a good default value.
 
 
 def getLinks(hp, limit):
@@ -36,7 +40,13 @@ def getLinks(hp, limit):
 
     print("Time taken: %f" % (time.time() - start))
 
-# construct our HoverPy object in capture mode
-with HoverPy(capture=args.capture) as hp:
-    # get the links from read the docs.
-    getLinks(hp, args.limit)
+# The function above gets the 50 articles from readthedocs, and prints how
+# long it took once we're done.
+
+if __name__ == "__main__":
+    with HoverPy(capture=args.capture) as hp:
+        getLinks(hp, args.limit)
+
+# Finally our program is run. Results will vary based on your internet
+# speed, but running in simulate mode should run around ``50x`` to
+# ``100x`` faster.

@@ -1,3 +1,4 @@
+# Please run this expample using <br><br>``env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py``<br><br>
 # This is by far the simplest example on how to get started with HoverPy.
 # Let's import our most important class HoverPy, along with whatever else
 # we may need
