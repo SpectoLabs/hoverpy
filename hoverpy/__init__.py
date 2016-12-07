@@ -190,6 +190,27 @@ class HoverPy:
         return self.delays(delays={"data": [delay]})
 
 
+def capture(func):
+    def func_wrapper():
+        with HoverPy(capture=True):
+            func()
+    return func_wrapper
+
+
+def simulate(func):
+    def func_wrapper():
+        with HoverPy(capture=False):
+            func()
+    return func_wrapper
+
+
+def wipe():
+    try:
+        os.remove("./requests.db")
+    except OSError:
+        pass
+
+
 def quick_test():
     hp = HoverPy()
     hp.capture()
