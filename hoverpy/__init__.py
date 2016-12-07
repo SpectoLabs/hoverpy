@@ -33,7 +33,7 @@ class HoverPy:
 
     def __init__(self, host="localhost", capture=False,
                  proxyPort=8500, adminPort=8888, inMemory=False,
-                 modify=False, middleware=""):
+                 modify=False, middleware="", dbpath=""):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
         self._host = host
@@ -42,6 +42,7 @@ class HoverPy:
         self._middleware = middleware
         self._flags = []
         self._capture = capture
+        self._dbpath = dbpath
 
         self.enableProxy()
         self.start()
@@ -185,6 +186,8 @@ class HoverPy:
 
     def flags(self):
         flags = []
+        if self._dbpath:
+            flags += ["-db-path", self._dbpath]
         if self._capture:
             flags.append("-capture")
         if self._inMemory:
