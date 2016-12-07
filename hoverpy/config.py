@@ -56,11 +56,12 @@ def downloadHoverFly():
     tmp = tempfile.mkdtemp()
     bundlePath = join(tmp, "hoverfly_bundle_%s.zip" % dist)
     hoverflyBinTempFile = join(tmp, hoverflyBinFile)
-    print("DOWNLOADING HOVERFLY")
 
     url = "https://github.com/SpectoLabs/hoverfly/"\
         "releases/download/v%s/hoverfly_bundle_%s.zip" % (
             dist_version, dist)
+
+    print("DOWNLOADING HOVERFLY FROM %s TO %s" % (url, tmp))
 
     if sys.version_info.major == 2:
         import urllib

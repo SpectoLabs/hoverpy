@@ -4,7 +4,6 @@ except ImportError:
     from distutils.core import setup
 
 version = '0.1.11'
-dist_version = '0.9.0'
 
 setup(
     name='hoverpy',
