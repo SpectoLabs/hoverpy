@@ -7,7 +7,7 @@ from subprocess import Popen, PIPE
 import platform
 import sys
 
-import config
+from . import config
 
 try:
     import requests
