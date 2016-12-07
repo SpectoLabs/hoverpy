@@ -9,6 +9,7 @@ from tornado.testing import AsyncHTTPTestCase
 import tornado
 import pycurl
 import time
+import os
 
 
 def prepare_curl_socks5(curl):
@@ -17,7 +18,7 @@ def prepare_curl_socks5(curl):
 
 hoverpy.wipe()
 
-n = 100
+n = 10
 
 
 class TestBigRequestsDBTornado(AsyncTestCase):
@@ -54,6 +55,8 @@ class TestBigRequestsDBTornado(AsyncTestCase):
 
             server.stop()
 
+        simulation = None
+
         start = time.time()
         with hoverpy.HoverPy() as hp:
 
@@ -80,23 +83,27 @@ class TestBigRequestsDBTornado(AsyncTestCase):
 
         hoverpy.wipe()
 
-        # start = time.time()
-        # with hoverpy.HoverPy(simulation="./simulation.json") as hp:
+        start = time.time()
+        with hoverpy.HoverPy() as hp:
+            import json
 
-        #     for i in range(n):
-        #         p = "/echouri/" + str(i)
-        #         http_request = tornado.httpclient.HTTPRequest(
-        #             "http://localhost:8000" + p,
-        #             prepare_curl_callback=prepare_curl_socks5,
-        #             proxy_host="localhost",
-        #             proxy_port=8500
-        #         )
-        #         response = yield http_client.fetch(http_request)
-        #         # self.assertIn(p, response.body)
+            hp.simulation(json.dumps(simulation))
 
-        #     print("re-reading data in json took %f" % (time.time() - start))
+            for i in range(n):
+                p = "/echouri/" + str(i)
+                http_request = tornado.httpclient.HTTPRequest(
+                    "http://localhost:8000" + p,
+                    prepare_curl_callback=prepare_curl_socks5,
+                    proxy_host="localhost",
+                    proxy_port=8500
+                )
+                response = yield http_client.fetch(http_request)
+                self.assertIn(p, response.body)
 
-        # hoverpy.wipe()
+            print("re-reading data in json took %f" % (time.time() - start))
+
+        hoverpy.wipe()
+        os.unlink("simulation.json")
 
 
 if __name__ == '__main__':

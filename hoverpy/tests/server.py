@@ -72,7 +72,8 @@ class EchoURIHandler(tornado.web.RequestHandler):
     @tornado.web.asynchronous
     @tornado.gen.engine
     def get(self, args):
-        self.write(self.request.uri)
+        import math
+        self.write(self.request.uri+randomword(int(math.pow(2, 20))))
         self.finish()
 
 

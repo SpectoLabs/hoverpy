@@ -7,7 +7,6 @@ from subprocess import Popen, PIPE
 import platform
 import sys
 
-sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 import config
 
 try:
@@ -134,8 +133,11 @@ class HoverPy:
     def config(self):
         return session().get(self.v2()+"/hoverfly").json()
 
-    def simulation(self):
-        return session().get(self.v2()+"/simulation").json()
+    def simulation(self, data=None):
+        if data:
+            return session().put(self.v2()+"/simulation", data=data)
+        else:
+            return session().get(self.v2()+"/simulation").json()
 
     def destination(self, name=""):
         if name:
