@@ -41,8 +41,7 @@ class HoverPy:
         self._modify = modify
         self._middleware = middleware
         self._flags = []
-        if capture:
-            self._flags.append("-capture")
+        self._capture = capture
 
         self.enableProxy()
         self.start()
@@ -91,15 +90,10 @@ class HoverPy:
     def start(self):
         logging.debug("starting %i" % id(self))
         FNULL = open(os.devnull, 'w')
-        if self._inMemory:
-            self._flags += ["-db", "memory"]
-        if self._modify:
-            assert(self._middleware)
-            self._flags += ["-modify", "-middleware", self._middleware]
-        logging.debug("flags:" + str(self._flags))
+        flags = self.flags()
         self._process = Popen(
             [hoverfly] +
-            self._flags,
+            flags,
             stdout=FNULL,
             stderr=subprocess.STDOUT)
         start = time.time()
@@ -188,6 +182,18 @@ class HoverPy:
         if httpMethod:
             delay["httpMethod"] = httpMethod
         return self.delays(delays={"data": [delay]})
+
+    def flags(self):
+        flags = []
+        if self._capture:
+            flags.append("-capture")
+        if self._inMemory:
+            flags += ["-db", "memory"]
+        if self._modify:
+            assert(self._middleware)
+            flags += ["-modify", "-middleware", self._middleware]
+        logging.debug("flags:" + str(flags))
+        return flags
 
 
 def capture(func):
