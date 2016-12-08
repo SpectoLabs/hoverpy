@@ -21,6 +21,37 @@ Above, the only real difference with ``examples/soap/soap.py`` is that we're loa
 
 When running this script with ``python examples/soap/soapModify.py`` you should notice your city is 'New York'. That's the middleware modifying the result of our SOAP operation.
 
+The XML from ip2geo
+~~~~~~~~~~~~~~~~~~~
+
+Before jumping into the middleware, let's see what we'll be modifying.
+
+.. code:: xml
+
+  <?xml version="1.0" encoding="UTF-8"?>
+  <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+     <soap:Body>
+        <ResolveIPResponse xmlns="http://ws.cdyne.com/">
+           <ResolveIPResult>
+              <City>New York</City>
+              <StateProvince>H9</StateProvince>
+              <Country>United Kingdom</Country>
+              <Organization />
+              <Latitude>51.5092</Latitude>
+              <Longitude>-0.09550476</Longitude>
+              <AreaCode>0</AreaCode>
+              <TimeZone />
+              <HasDaylightSavings>false</HasDaylightSavings>
+              <Certainty>90</Certainty>
+              <RegionName />
+              <CountryCode>GB</CountryCode>
+           </ResolveIPResult>
+        </ResolveIPResponse>
+     </soap:Body>
+  </soap:Envelope>
+
+This is the XML that gets sent back to us after calling the ``ResolveIP`` method, as defined in http://ws.cdyne.com/ip2geo/ip2geo.asmx?WSDL. We are interested in modifying the ``City`` node.
+
 examples/soap/modify_payload.py
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
