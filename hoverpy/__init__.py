@@ -32,7 +32,8 @@ class HoverPy:
 
     def __init__(self, host="localhost", capture=False,
                  proxyPort=8500, adminPort=8888, inMemory=False,
-                 modify=False, middleware="", dbpath="", simulation=""):
+                 modify=False, middleware="",
+                 dbpath="requests.db", simulation=""):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
         self._host = host
@@ -59,21 +60,41 @@ class HoverPy:
         return self
 
     def wipe(self):
+        """
+        Wipe the bolt database.
+
+        Calling this after HoverPy has been instantiated is
+        potentially dangerous. This function is mostly used
+        internally for unit tests.
+        """
         try:
-            os.remove("./requests.db")
+            if os.isfile(self._dbpath):
+                os.remove(self._dbpath)
         except OSError:
             pass
 
     def host(self):
+        """
+        Returns the URL to the admin interface / APIs.
+        """
         return "http://%s:%i" % (self._host, self._adminPort)
 
     def v1(self):
+        """
+        Return the URL to the v1 API
+        """
         return self.host()+"/api"
 
     def v2(self):
+        """
+        Return the URL to the v2 API
+        """
         return self.host()+"/api/v2"
 
     def enableProxy(self):
+        """
+        Set the required environment variables to enable the use of hoverfly as a proxy.
+        """
         logging.debug("enabling proxy")
         os.environ[
             "HTTP_PROXY"] = "http://%s:%i" % (self._host, self._proxyPort)
@@ -85,10 +106,20 @@ class HoverPy:
             "cert.pem")
 
     def disableProxy(self):
+        """
+        Clear the environment variables required to enable the use of hoverfly as a proxy.
+        """
         del os.environ['HTTP_PROXY']
         del os.environ['HTTPS_PROXY']
+        del os.environ['REQUESTS_CA_BUNDLE']
 
     def start(self):
+        """
+        Start the hoverfly process.
+
+        This function waits until it can make contact
+        with the hoverfly API before returning.
+        """
         logging.debug("starting %i" % id(self))
         FNULL = open(os.devnull, 'w')
         flags = self.flags()
@@ -118,6 +149,9 @@ class HoverPy:
         raise ValueError("Could not start hoverfly!")
 
     def stop(self):
+        """
+        Stop the hoverfly process.
+        """
         if logging:
             logging.debug("stopping")
         self._process.kill()
@@ -125,21 +159,45 @@ class HoverPy:
         self.disableProxy()
 
     def capture(self):
+        """
+        Switches hoverfly to capture mode.
+        """
         return self.mode("capture")
 
     def simulate(self):
+        """
+        Switches hoverfly to simulate mode.
+
+        Please note simulate is the default mode.
+        """
         return self.mode("simulate")
 
     def config(self):
+        """
+        Returns the hoverfly configuration json.
+        """
         return session().get(self.v2()+"/hoverfly").json()
 
     def simulation(self, data=None):
+        """
+        Gets / Sets the simulation data.
+
+        If no data is passed in, then this method acts as a getter.
+        if data is passed in, then this method acts as a setter.
+
+        Keyword arguments:
+        data -- the simulation data you wish to set (default None)
+        """
         if data:
             return session().put(self.v2()+"/simulation", data=data)
         else:
             return session().get(self.v2()+"/simulation").json()
 
     def destination(self, name=""):
+        """
+        Gets / Sets the destination data.
+        TBD.
+        """
         if name:
             return session().put(
                 self.v2()+"/hoverfly/destination",
@@ -148,9 +206,21 @@ class HoverPy:
             return session().get(self.v2()+"/hoverfly/destination").json()
 
     def middleware(self):
+        """
+        Gets the middleware data.
+        TBD.
+        """
         return session().get(self.v2()+"/hoverfly/middleware").json()
 
     def mode(self, mode=None):
+        """
+        Gets / Sets the mode.
+
+        If no mode is provided, then this method acts as a getter.
+
+        Keyword arguments:
+        mode -- this should either be 'capture' or 'simulate' (default None)
+        """
         if mode:
             logging.debug("SWITCHING TO %s" % mode)
             url = self.v2()+"/hoverfly/mode"
@@ -161,21 +231,33 @@ class HoverPy:
             return session().get(self.v2()+"/hoverfly/mode").json()["mode"]
 
     def usage(self):
+        """
+        Gets the usage data. TBD.
+        """
         return session().get(self.v2()+"/hoverfly/usage").json()
 
     def metadata(self, delete=False):
+        """
+        Gets the metadata. TBD.
+        """
         if delete:
             return session().delete(self.v1()+"/metadata").json()
         else:
             return session().get(self.v1()+"/metadata").json()
 
     def records(self, data=None):
+        """
+        Gets / Sets records. TBD.
+        """
         if data:
             return session().post(self.v1()+"/records", data=data).json()
         else:
             return session().get(self.v1()+"/records").json()
 
     def delays(self, delays=[]):
+        """
+        Gets / Sets the delays. TBD.
+        """
         if delays:
             return session().put(
                 self.v1()+"/delays", data=json.dumps(delays)).json()
@@ -183,12 +265,18 @@ class HoverPy:
             return session().get(self.v1()+"/delays").json()
 
     def addDelay(self, urlPattern="", delay=0, httpMethod=None):
+        """
+        Adds delays. TBD.
+        """
         delay = {"urlPattern": urlPattern, "delay": delay}
         if httpMethod:
             delay["httpMethod"] = httpMethod
         return self.delays(delays={"data": [delay]})
 
     def flags(self):
+        """
+        Internal method. Turns arguments into flags.
+        """
         flags = []
         if self._dbpath:
             flags += ["-db-path", self._dbpath]

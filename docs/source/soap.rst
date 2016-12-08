@@ -6,11 +6,11 @@ soap
 
 In this example we'll take a look a using hoverpy when working with SOAP. To run this example, simply execute:
 
-``env PYTHONPATH=.:${PYTHONPATH} examples/soap/soap.py --capture``
+``examples/soap/soap.py --capture``
 
 which runs the program in capture mode, then:
 
-``env PYTHONPATH=.:${PYTHONPATH} examples/soap/soap.py``
+``examples/soap/soap.py``
 
 Which simply runs our program in simulate mode.
 

@@ -1,8 +1,8 @@
 # This is a slightly more advanced example, where we query readthedocs.io for articles. In the first phase, we run
 # the program in capture mode. This is done using the capture flag:<br><br>
-# ``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py --capture``<br><br>
+# ``python examples/readthedocs/readthedocs.py --capture``<br><br>
 # the program can then be run again in simulate mode, in a fraction of the time:<br><br>
-# ``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py``<br><br>
+# ``python examples/readthedocs/readthedocs.py``<br><br>
 
 # We'll now run through the code to see what it's doing.
 from hoverpy import HoverPy

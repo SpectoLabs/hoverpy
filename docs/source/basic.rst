@@ -6,7 +6,7 @@ basic
 
 This is by far the simplest example on how to get started with HoverPy. Please run this example using: 
 
-``$ env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py``
+``$ python examples/basic/basic.py``
 
 You should see your IP address show up twice. Let's walk through the code to see what's happening. 
 

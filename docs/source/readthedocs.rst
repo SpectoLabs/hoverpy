@@ -6,11 +6,11 @@ readthedocs
 
 This is a slightly more advanced example, where we query readthedocs.io for articles. In the first phase, we run the program in capture mode. This is done using the capture flag:
 
-``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py --capture``
+``python examples/readthedocs/readthedocs.py --capture``
 
 the program can then be run again in simulate mode, in a fraction of the time:
 
-``env PYTHONPATH=.:${PYTHONPATH} python examples/readthedocs/readthedocs.py``
+`python examples/readthedocs/readthedocs.py``
 
 We'll now run through the code to see what it's doing. 
 

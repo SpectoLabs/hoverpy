@@ -7,15 +7,17 @@ Installation
 Cloning
 -------
 
-We're currently in development mode, so you're better off cloning the repository. Make sure to pull often!
+We're currently in development mode, so you're better off cloning the repository.
 
 .. code:: bash
 
-    $ virtualenv hoverpyenv
-    $ cd hoverpyenv
-    $ source bin/activate
     $ git clone https://github.com/SpectoLabs/hoverpy.git
     $ cd hoverpy
+    $ virtualenv .venv
+    $ source .venv/bin/activate
+    $ python setup.py install
+
+This installs hoverpy and its requirements in your .venv folder; make sure to pull often, and run the ``python setup.py install`` when you do.
 
 Testing
 -------
@@ -52,7 +54,7 @@ Please note we'll cover the examples in the `usage`_ page. But for the truly imp
 
 .. code:: bash
 
-    $ env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py
+    $ python examples/basic/basic.py
 
 Installing from repo
 --------------------
@@ -70,7 +72,7 @@ You can also install HoverPy from PIP, however once again you're better off play
 
 .. code:: bash
 
-    $ pip install --user -i https://testpypi.python.org/pypi hoverpy
+    $ pip install -i https://testpypi.python.org/pypi hoverpy
 
 HoverFly binary
 ---------------
@@ -79,5 +81,5 @@ Please note that when you install HoverPy, the HoverFly binaries get downloaded 
 
 .. code:: bash
 
-    ${home}/hoverfly/bin/dist_vX.X.X/${OS}_${ARCH}/hoverfly
+    ${home}/.hoverfly/bin/dist_vX.X.X/${OS}_${ARCH}/hoverfly
 

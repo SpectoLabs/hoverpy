@@ -1,5 +1,5 @@
 # This is by far the simplest example on how to get started with HoverPy.
-# Please run this example using: <br><br>``$ env PYTHONPATH=.:${PYTHONPATH} python examples/basic/basic.py``<br><br>
+# Please run this example using: <br><br>``$ python examples/basic/basic.py``<br><br>
 # You should see your IP address show up twice. Let's walk through the
 # code to see what's happening.
 from hoverpy import HoverPy
