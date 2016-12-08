@@ -4,10 +4,8 @@ import sys
 import json
 import logging
 import random
-import traceback
 from lxml import objectify
 from lxml import etree
-
 
 logging.basicConfig(filename='middleware.log', level=logging.DEBUG)
 logging.debug('Middleware "modify_request" called')
@@ -24,24 +22,14 @@ def main():
             root = objectify.fromstring(str(body))
             ns = "{http://ws.cdyne.com/}"
             logging.debug("transforming")
-            root.Body[
-                ns +
-                "ResolveIPResponse"][
-                ns +
-                "ResolveIPResult"].City = "New York"
 
-            objectify.deannotate(
-                root.Body[
-                    ns +
-                    "ResolveIPResponse"][
-                        ns +
-                        "ResolveIPResult"].City)
-            etree.cleanup_namespaces(
-                root.Body[
-                    ns +
-                    "ResolveIPResponse"][
-                        ns +
-                        "ResolveIPResult"].City)
+            ipe = ns + "ResolveIPResponse"
+            ipt = ns + "ResolveIPResult"
+
+            root.Body[ipe][ipt].City = "New York"
+
+            objectify.deannotate(root.Body[ipe][ipt].City)
+            etree.cleanup_namespaces(root.Body[ipe][ipt].City)
 
             payload_dict["response"]["body"] = etree.tostring(root)
 
@@ -49,7 +37,6 @@ def main():
 
         except Exception:
             pass
-            # logging.debug(traceback.format_exc())
 
     print(json.dumps(payload_dict))
 

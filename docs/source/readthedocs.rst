@@ -10,7 +10,7 @@ This is a slightly more advanced example, where we query readthedocs.io for arti
 
 the program can then be run again in simulate mode, in a fraction of the time:
 
-`python examples/readthedocs/readthedocs.py``
+``python examples/readthedocs/readthedocs.py``
 
 We'll now run through the code to see what it's doing. 
 

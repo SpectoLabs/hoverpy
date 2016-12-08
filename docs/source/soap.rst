@@ -4,7 +4,7 @@
 soap
 ====
 
-In this example we'll take a look a using hoverpy when working with SOAP. To run this example, simply execute:
+In this example we'll take a look at using hoverpy when working with SOAP. To run this example, simply execute:
 
 ``examples/soap/soap.py --capture``
 

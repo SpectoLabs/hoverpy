@@ -17,6 +17,7 @@ I don't know about you, but for me the best way of getting into things is by try
    urllib2eg
    urllib3eg
    soap
+   modify_soap
 
 
 
