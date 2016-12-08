@@ -50,4 +50,4 @@ We parse our xml and turn it into an object. Remember that our program gets our 
    :language: python
    :lines: 31-34
 
-We finally remove annotations and namespaces that got added to the City element by the objectify library.
+We finally remove annotations and namespaces that got added to the City element by the objectify library, and serialise the modified body back into the response. And we are done.
