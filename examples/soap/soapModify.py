@@ -4,13 +4,6 @@ from hoverpy import HoverPy
 import pysimplesoap
 import requests
 
-from argparse import ArgumentParser
-
-parser = ArgumentParser(description="Perform proxy testing/URL list creation")
-parser.add_argument("--capture", help="capture the data", action="store_true")
-args = parser.parse_args()
-
-
 with HoverPy(modify=True, middleware="python examples/soap/modify_payload.py"):
     ipAddress = requests.get("http://ip.jsontest.com/myip").json()["ip"]
     pysimplesoap.transport.set_http_wrapper("urllib2")
