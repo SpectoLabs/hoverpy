@@ -53,7 +53,7 @@ HoverPy uses Apache License V2. See LICENSE.txt for more details.
 
 .. |PyPI version| image:: https://badge.fury.io/py/hoverpy.svg
    :target: https://testpypi.python.org/pypi/hoverpy
-.. |RTD badget| image:: https://readthedocs.org/projects/pip/badge/?version=latest
+.. |RTD badget| image:: https://readthedocs.org/projects/hoverpy/badge/?version=latest
    :target: http://hoverpy.readthedocs.io/en/latest/
 .. |Build Status| image:: https://travis-ci.org/SpectoLabs/hoverpy.svg?branch=master
    :target: https://travis-ci.org/SpectoLabs/hoverpy
