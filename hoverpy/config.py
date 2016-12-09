@@ -30,7 +30,7 @@ dist = getOS()+"_"+getArch()
 
 dirName = dirname(abspath(__file__))
 
-version = '0.1.12'
+version = '0.1.13'
 dist_version = '0.9.2'
 
 hoverflyDirectory = join(
