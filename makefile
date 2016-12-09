@@ -55,6 +55,7 @@ test_local_tmp_install_python_3:
 
 test:
 	python setup.py test
+	python3.6 setup.py test
 
 docs: .PHONY
 	python hoverpy/generateDocs.py
