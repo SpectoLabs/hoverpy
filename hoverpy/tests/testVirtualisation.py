@@ -3,9 +3,9 @@ import unittest
 from hoverpy import HoverPy
 import hoverpy
 import logging
-from pipetestserver import ThreadedServerControl
-from pipetestserver import application
-from pipetestserver import proxiedClient
+from . import pipetestserver
+# from pipetestserver import application
+# from pipetestserver import proxiedClient
 import time
 import json
 import os
@@ -16,29 +16,32 @@ class TestVirt(unittest.TestCase):
     endpoint = 'http://localhost:8000/'
 
     def testCapture(self):
-        server = ThreadedServerControl(application)
+        server = pipetestserver.ThreadedServerControl(
+            pipetestserver.application)
         server.start()
 
         with HoverPy(capture=True):
-            result = proxiedClient(2, endpoint=self.endpoint)
+            result = pipetestserver.proxiedClient(2, endpoint=self.endpoint)
             self.assertEqual(result, 4)
 
         server.stop()
 
     def testPlayback(self):
-        server = ThreadedServerControl(application)
+        server = pipetestserver.ThreadedServerControl(
+            pipetestserver.application)
         server.start()
 
         with HoverPy(capture=True) as hp:
-            result = proxiedClient(2, endpoint=self.endpoint)
+            result = pipetestserver.proxiedClient(2, endpoint=self.endpoint)
             self.assertEqual(result, 4)
             server.stop()
             hp.simulate()
-            result = proxiedClient(2, endpoint=self.endpoint)
+            result = pipetestserver.proxiedClient(2, endpoint=self.endpoint)
             self.assertEqual(result, 4)
 
     def testStressTest(self):
-        server = ThreadedServerControl(application)
+        server = pipetestserver.ThreadedServerControl(
+            pipetestserver.application)
         server.start()
 
         n = 10
@@ -46,7 +49,9 @@ class TestVirt(unittest.TestCase):
         def runChecks():
             for i in range(n):
                 st = str(i)*2**20
-                result = proxiedClient(st, endpoint=self.endpoint)
+                result = pipetestserver.proxiedClient(
+                    st,
+                    endpoint=self.endpoint)
                 self.assertEqual(result, st*2)
 
         hoverpy.wipe()
