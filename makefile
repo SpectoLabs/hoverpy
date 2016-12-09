@@ -71,7 +71,7 @@ docs: .PHONY
 	mv examples/urllib2eg/urllib2eg.rst docs/source/
 	mv examples/urllib3eg/urllib3eg.rst docs/source/
 
-	sphinx-apidoc -o docs/source/ hoverpy
+	#sphinx-apidoc -o docs/source/ hoverpy
 	
 	cd docs; make html;
 #	cd docs/source/mermaid/intro; mermaid *;
