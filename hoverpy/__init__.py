@@ -22,12 +22,6 @@ if not hoverfly:
     hoverfly = config.downloadHoverFly()
 
 
-def session():
-    session = requests.Session()
-    session.trust_env = False
-    return session
-
-
 class HoverPy:
 
     def __init__(self, host="localhost", capture=False,
@@ -44,7 +38,9 @@ class HoverPy:
         self._capture = capture
         self._dbpath = dbpath
         self._simulation = simulation
-
+        self._session = None
+        self._session = requests.Session()
+        self._session.trust_env = False
         self.enableProxy()
         self.start()
 
@@ -121,18 +117,19 @@ class HoverPy:
         with the hoverfly API before returning.
         """
         logging.debug("starting %i" % id(self))
-        FNULL = open(os.devnull, 'w')
+        self.FNULL = open(os.devnull, 'w')
         flags = self.flags()
         self._process = Popen(
             [hoverfly] +
             flags,
-            stdout=FNULL,
+            stdin=self.FNULL,
+            stdout=self.FNULL,
             stderr=subprocess.STDOUT)
         start = time.time()
         while time.time() - start < 1:
             try:
                 url = "http://%s:%i/api/health" % (self._host, self._adminPort)
-                r = session().get(url)
+                r = self._session.get(url)
                 j = r.json()
                 up = "message" in j and "healthy" in j["message"]
                 if up:
@@ -154,9 +151,17 @@ class HoverPy:
         """
         if logging:
             logging.debug("stopping")
-        self._process.kill()
+        self._process.terminate()
+        # communicate means we wait until the process
+        # was actually terminated, this removes some
+        # warnings in python3
+        self._process.communicate()
         self._process = None
+        self.FNULL.close()
+        self.FNULL = None
         self.disableProxy()
+        # del self._session
+        # self._session = None
 
     def capture(self):
         """
@@ -176,7 +181,7 @@ class HoverPy:
         """
         Returns the hoverfly configuration json.
         """
-        return session().get(self.v2()+"/hoverfly").json()
+        return self._session.get(self.v2()+"/hoverfly").json()
 
     def simulation(self, data=None):
         """
@@ -189,9 +194,9 @@ class HoverPy:
         data -- the simulation data you wish to set (default None)
         """
         if data:
-            return session().put(self.v2()+"/simulation", data=data)
+            return self._session.put(self.v2()+"/simulation", data=data)
         else:
-            return session().get(self.v2()+"/simulation").json()
+            return self._session.get(self.v2()+"/simulation").json()
 
     def destination(self, name=""):
         """
@@ -199,18 +204,18 @@ class HoverPy:
         TBD.
         """
         if name:
-            return session().put(
+            return self._session.put(
                 self.v2()+"/hoverfly/destination",
                 data={"destination": name}).json()
         else:
-            return session().get(self.v2()+"/hoverfly/destination").json()
+            return self._session.get(self.v2()+"/hoverfly/destination").json()
 
     def middleware(self):
         """
         Gets the middleware data.
         TBD.
         """
-        return session().get(self.v2()+"/hoverfly/middleware").json()
+        return self._session.get(self.v2()+"/hoverfly/middleware").json()
 
     def mode(self, mode=None):
         """
@@ -225,44 +230,44 @@ class HoverPy:
             logging.debug("SWITCHING TO %s" % mode)
             url = self.v2()+"/hoverfly/mode"
             logging.debug(url)
-            return session().put(
+            return self._session.put(
                 url, data=json.dumps({"mode": mode})).json()["mode"]
         else:
-            return session().get(self.v2()+"/hoverfly/mode").json()["mode"]
+            return self._session.get(self.v2()+"/hoverfly/mode").json()["mode"]
 
     def usage(self):
         """
         Gets the usage data. TBD.
         """
-        return session().get(self.v2()+"/hoverfly/usage").json()
+        return self._session.get(self.v2()+"/hoverfly/usage").json()
 
     def metadata(self, delete=False):
         """
         Gets the metadata. TBD.
         """
         if delete:
-            return session().delete(self.v1()+"/metadata").json()
+            return self._session.delete(self.v1()+"/metadata").json()
         else:
-            return session().get(self.v1()+"/metadata").json()
+            return self._session.get(self.v1()+"/metadata").json()
 
     def records(self, data=None):
         """
         Gets / Sets records. TBD.
         """
         if data:
-            return session().post(self.v1()+"/records", data=data).json()
+            return self._session.post(self.v1()+"/records", data=data).json()
         else:
-            return session().get(self.v1()+"/records").json()
+            return self._session.get(self.v1()+"/records").json()
 
     def delays(self, delays=[]):
         """
         Gets / Sets the delays. TBD.
         """
         if delays:
-            return session().put(
+            return self._session.put(
                 self.v1()+"/delays", data=json.dumps(delays)).json()
         else:
-            return session().get(self.v1()+"/delays").json()
+            return self._session.get(self.v1()+"/delays").json()
 
     def addDelay(self, urlPattern="", delay=0, httpMethod=None):
         """
