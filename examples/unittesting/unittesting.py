@@ -3,13 +3,13 @@
 # that you are testing your code against known data. This makes you hermetic to
 # issues with third party APIs. Let's begin by importing hoverpy.
 
-import hoverpy
+from hoverpy import testing
 
 # Instead of inheriting off `unittest.TestCase` let's inherit off
-# `hoverpy.TestCase`
+# `hoverpy.testing.TestCase`
 
 
-class TestRTD(hoverpy.TestCase):
+class TestRTD(testing.TestCase):
 
     # in our test, we'll once again download a load of readthedocs pages
     def test_rtd_links(self):

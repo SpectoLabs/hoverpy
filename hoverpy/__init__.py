@@ -393,32 +393,5 @@ def quick_test():
     if "data" in hp.delays().keys():
         print("HOVERPY AND HOVERFLY QUICK TEST SUCCESS!!")
 
-import unittest
-
-
-class TestCase(unittest.TestCase):
-
-    hp = None
-
-    def setUp(self):
-        enabled = os.environ.get(
-            "HOVERPY_ENABLED",
-            "true").lower() in [
-            "true",
-            "1",
-            "on"]
-        if enabled:
-            capture = os.environ.get(
-                "HOVERPY_CAPTURE",
-                "").lower() in [
-                "true",
-                "1",
-                "on"]
-            self.hp = HoverPy(capture=capture)
-
-    def tearDown(self):
-        if self.hp:
-            self.hp.__disableProxy()
-
 if __name__ == "__main__":
     quick_test()

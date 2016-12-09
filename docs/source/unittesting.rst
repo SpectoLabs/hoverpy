@@ -8,14 +8,14 @@ In this example, we'll take a look at writing unit tests that use HoverPy. Pleas
 
 ::
 
->>> import hoverpy
+>>> from hoverpy import testing
 
 
-Instead of inheriting off `unittest.TestCase` let's inherit off `hoverpy.TestCase` 
+Instead of inheriting off `unittest.TestCase` let's inherit off `hoverpy.testing.TestCase` 
 
 ::
 
->>> class TestRTD(hoverpy.TestCase):
+>>> class TestRTD(testing.TestCase):
 
 
 In our test, we'll once again download a load of readthedocs pages 
