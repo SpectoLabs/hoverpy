@@ -4,9 +4,10 @@ import os
 
 
 class TestCase(unittest.TestCase):
-"""
-TestCase, which can be used like unittest.TestCase
-"""
+
+    """
+    TestCase, which can be used like unittest.TestCase
+    """
 
     def setUp(self):
         """
