@@ -24,10 +24,30 @@ if not hoverfly:
 
 class HoverPy:
 
-    def __init__(self, host="localhost", capture=False,
-                 proxyPort=8500, adminPort=8888, inMemory=False,
-                 modify=False, middleware="",
-                 dbpath="requests.db", simulation=""):
+    def __init__(self,
+                 host="localhost",
+                 capture=False,
+                 proxyPort=8500,
+                 adminPort=8888,
+                 inMemory=False,
+                 modify=False,
+                 middleware="",
+                 dbpath="requests.db",
+                 simulation="",
+                 synthesize=False,
+                 metrics=False,
+                 dev=False,
+                 auth=False,
+                 cert="",
+                 certName="",
+                 certOrg="",
+                 dest=[],
+                 verbose=False,
+                 generateCACert=False,
+                 destination="",
+                 key="",
+                 tlsVerification=True,
+                 ):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
         self._host = host
@@ -38,11 +58,76 @@ class HoverPy:
         self._capture = capture
         self._dbpath = dbpath
         self._simulation = simulation
-        self._session = None
+        self._synthesize = synthesize
+        self._verbose = verbose
         self._session = requests.Session()
         self._session.trust_env = False
+        self._metrics = metrics
+        self._dev = dev
+        self._auth = auth
+        self._cert = cert
+        self._certName = certName
+        self._certOrg = certOrg
+        self._dest = dest
+        self._generateCACert = generateCACert
+        self._destination = destination
+        self._key = key
+        self._tlsVerification = tlsVerification
         self.enableProxy()
         self.start()
+
+    def flags(self):
+        """
+        Internal method. Turns arguments into flags.
+        """
+        flags = []
+        if self._capture:
+            flags.append("-capture")
+        if self._inMemory:
+            flags += ["-db", "memory"]
+        if self._synthesize:
+            assert(self._middleware)
+            flags += ["-synthesize"]
+        if self._simulation:
+            flags += ["-import", self._simulation]
+        if self._proxyPort:
+            flags += ["-pp", str(self._proxyPort)]
+        if self._adminPort:
+            flags += ["-ap", str(self._adminPort)]
+        if self._modify:
+            flags += ["-modify"]
+        if self._verbose:
+            flags += ["-v"]
+        if self._dev:
+            flags += ["-dev"]
+        if self._metrics:
+            flags += ["-metrics"]
+        if self._auth:
+            flags += ["-auth"]
+        if self._middleware:
+            flags += ["-middleware", self._middleware]
+        if self._cert:
+            flags += ["-cert", self._cert]
+        if self._certName:
+            flags += ["-cert-name", self._certName]
+        if self._certOrg:
+            flags += ["-cert-org", self._certOrg]
+        if self._dbpath:
+            flags += ["-db-path", self._dbpath]
+        if self._destination:
+            flags += ["-destination", self._destination]
+        if self._key:
+            flags += ["-key", self._key]
+        if self._dest:
+            for i in range(len(self._dest)):
+                self.flags += ["-dest", self._dest[i]]
+        if self._generateCACert:
+            flags += ["-generate-ca-cert"]
+        if not self._tlsVerification:
+            flags += ["-tls-verification", "false"]
+
+        logging.debug("flags:" + str(flags))
+        return flags
 
     def __del__(self):
         if self._process:
@@ -277,25 +362,6 @@ class HoverPy:
         if httpMethod:
             delay["httpMethod"] = httpMethod
         return self.delays(delays={"data": [delay]})
-
-    def flags(self):
-        """
-        Internal method. Turns arguments into flags.
-        """
-        flags = []
-        if self._dbpath:
-            flags += ["-db-path", self._dbpath]
-        if self._capture:
-            flags.append("-capture")
-        if self._inMemory:
-            flags += ["-db", "memory"]
-        if self._simulation:
-            flags += ["-import", self._simulation]
-        if self._modify:
-            assert(self._middleware)
-            flags += ["-modify", "-middleware", self._middleware]
-        logging.debug("flags:" + str(flags))
-        return flags
 
 
 def capture(func):
