@@ -45,6 +45,7 @@ class HoverPy:
                  destination="",
                  key="",
                  tlsVerification=True,
+                 httpsToHttp=False
                  ):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
@@ -71,6 +72,7 @@ class HoverPy:
         self._destination = destination
         self._key = key
         self._tlsVerification = tlsVerification
+        self._httpsToHttp = httpsToHttp
         self.__enableProxy()
         self.__start()
 
@@ -206,6 +208,15 @@ class HoverPy:
             delay["httpMethod"] = httpMethod
         return self.delays(delays={"data": [delay]})
 
+    def httpProxy(self):
+        return "http://%s:%i" % (self._host, self._proxyPort)
+
+    def httpsProxy(self):
+        if self._httpsToHttp:
+            return self.httpProxy()
+        else:
+            return "https://%s:%i" % (self._host, self._proxyPort)
+
     def __del__(self):
         if self._process:
             self.__stop()
@@ -239,11 +250,11 @@ class HoverPy:
         """
         Set the required environment variables to enable the use of hoverfly as a proxy.
         """
-        logging.debug("enabling proxy")
         os.environ[
-            "HTTP_PROXY"] = "http://%s:%i" % (self._host, self._proxyPort)
+            "HTTP_PROXY"] = self.httpProxy()
         os.environ[
-            "HTTPS_PROXY"] = "https://%s:%i" % (self._host, self._proxyPort)
+            "HTTPS_PROXY"] = self.httpsProxy()
+
         os.environ["REQUESTS_CA_BUNDLE"] = os.path.join(
             os.path.dirname(
                 os.path.abspath(__file__)),
