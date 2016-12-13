@@ -17,11 +17,17 @@ all:
 # ┬─┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐  ┌─┐┌─┐┌┬┐┌─┐┬ ┬  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┬┌─┐┬─┐┌─┐┬┌─┐┌┐┌
 # ├┬┘├┤ │  ├┤ ├─┤└─┐├┤   ├─┘├─┤ │ │  ├─┤   │ ├┤ └─┐ │   └┐┌┘├┤ ├┬┘└─┐││ ││││
 # ┴└─└─┘┴─┘└─┘┴ ┴└─┘└─┘  ┴  ┴ ┴ ┴ └─┘┴ ┴   ┴ └─┘└─┘ ┴    └┘ └─┘┴└─└─┘┴└─┘┘└┘
-release_test_patch: clean patch_tag commit push reg_and_upload_to_pypi clean
+release_test_patch: clean patch_tag commit push reg_and_upload_to_test_pypi clean
 
-release_test: clean tag commit push reg_and_upload_to_pypi clean
+release_patch: clean patch_tag commit push reg_and_upload_to_pypi clean
 
-reg_and_upload_to_pypi: register_test upload_test
+release_test: clean tag commit push reg_and_upload_to_test_pypi clean
+
+release: clean tag commit push reg_and_upload_to_pypi clean
+
+reg_and_upload_to_test_pypi: register_test upload_test
+
+reg_and_upload_to_pypi: register upload
 
 patch_tag: semver_patch tag
 
@@ -101,8 +107,14 @@ docs: .PHONY
 register_test:
 	python setup.py register -r pypitest
 
+register:
+	python setup.py register -r pypi
+
 upload_test:
 	python setup.py sdist upload -r pypitest
+
+upload:
+	python setup.py sdist upload -r pypi
 
 do_tag:
 	git tag $(VERSION) -m "Adds a tag so that we can put this on PyPI."
