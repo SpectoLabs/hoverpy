@@ -9,9 +9,9 @@ import os
 import tempfile
 import sys
 
-p3 = sys.version_info.major == 3
+skip = sys.version_info.major == 3 or os.name == 'nt'
 
-if not p3:
+if not skip:
     from . import pipetestserver
 
 
@@ -19,7 +19,7 @@ class TestVirt(unittest.TestCase):
     endpoint = 'http://localhost:8000/'
 
     def testCapture(self):
-        if p3:
+        if skip:
             return
         server = pipetestserver.ThreadedServerControl(
             pipetestserver.application)
@@ -32,7 +32,7 @@ class TestVirt(unittest.TestCase):
         server.stop()
 
     def testPlayback(self):
-        if p3:
+        if skip:
             return
         server = pipetestserver.ThreadedServerControl(
             pipetestserver.application)
@@ -47,7 +47,7 @@ class TestVirt(unittest.TestCase):
             self.assertEqual(result, 4)
 
     def testStressTest(self):
-        if p3:
+        if skip:
             return
         server = pipetestserver.ThreadedServerControl(
             pipetestserver.application)
@@ -93,7 +93,7 @@ class TestVirt(unittest.TestCase):
         os.unlink("simulation.json")
 
     def testSimulation(self):
-        if p3:
+        if skip:
             return
         hoverpy.wipe()
         simulation = None
@@ -109,7 +109,7 @@ class TestVirt(unittest.TestCase):
         hoverpy.wipe()
 
     def testdbpath(self):
-        if p3:
+        if skip:
             return
         tmp = tempfile.mkdtemp()
         requestsFile = os.path.join(tmp, "requests.db")
