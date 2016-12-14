@@ -93,8 +93,6 @@ class TestVirt(unittest.TestCase):
         os.unlink("simulation.json")
 
     def testSimulation(self):
-        if skip:
-            return
         hoverpy.wipe()
         simulation = None
         with HoverPy(capture=True) as hp:
@@ -109,8 +107,6 @@ class TestVirt(unittest.TestCase):
         hoverpy.wipe()
 
     def testdbpath(self):
-        if skip:
-            return
         tmp = tempfile.mkdtemp()
         requestsFile = os.path.join(tmp, "requests.db")
         with HoverPy(capture=True, dbpath=requestsFile) as hp:

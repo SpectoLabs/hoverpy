@@ -45,7 +45,8 @@ class HoverPy:
                  destination="",
                  key="",
                  tlsVerification=True,
-                 httpsToHttp=False
+                 httpsToHttp=False,
+                 recordMode=None
                  ):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
@@ -73,7 +74,12 @@ class HoverPy:
         self._key = key
         self._tlsVerification = tlsVerification
         self._httpsToHttp = httpsToHttp
+        self._recordMode = recordMode
         self.__enableProxy()
+
+        if self._recordMode == "once":
+            self._capture = not os.path.isfile(self._dbpath)
+
         self.__start()
 
     def wipe(self):
