@@ -1,4 +1,4 @@
-.. _usage
+.. _usage:
 
 =====
 Usage

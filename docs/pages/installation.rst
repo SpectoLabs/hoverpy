@@ -70,10 +70,10 @@ You can also install HoverPy from PIP:
 
     $ pip install hoverpy
 
-HoverFly binary
+Hoverfly binary
 ---------------
 
-Please note that when you install HoverPy, the HoverFly binaries get downloaded and installed in your home directory, in
+Please note that when you install HoverPy, the Hoverfly binaries get downloaded and installed in your home directory, in
 
 .. code:: bash
 

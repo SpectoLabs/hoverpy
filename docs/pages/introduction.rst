@@ -27,13 +27,13 @@ and random outages can cause integration tests to fail unexpectedly.
 Service Virtualisation is software that records the interactions between
 *you*, and the *big unpredictible world*.
 
-.. figure:: mermaid/intro/graph1.png
+.. figure:: ../mermaid/intro/graph1.png
    :alt: hoverpy intro image1
 
 A very sturdy software solution for Service Virtualisation is
 `Mirage <https://github.com/SpectoLabs/mirage>`__, which is used
 extensively in the airline industry. Its successor,
-`HoverFly <http://hoverfly.io>`__, has taken all the lessons learned in
+`Hoverfly <http://hoverfly.io>`__, has taken all the lessons learned in
 the years of use of Mirage. Both Mirage and Hoverfly are open source
 software, developed at `specto.io <http://spectio.io>`__.
 
@@ -41,7 +41,7 @@ HoverPy is the thin layer between Python and HoverFly. HoverFly is a
 light-weight and extremely fast proxy written in Go, and does the heavy
 lifting for HoverPy. So a more accurate picture might be:
 
-.. figure:: mermaid/intro/graph2.png
+.. figure:: ../mermaid/intro/graph2.png
    :alt: hoverpy intro image2
 
 --------------
@@ -132,7 +132,7 @@ available in the Usage section.
 Capture mode
 ^^^^^^^^^^^^
 
-.. figure:: mermaid/intro/graph3.png
+.. figure:: ../mermaid/intro/graph3.png
    :alt: hoverpy intro image3
 
 
@@ -145,7 +145,7 @@ development or testing.
 Simulate mode
 ^^^^^^^^^^^^^
 
-.. figure:: mermaid/intro/graph4.png
+.. figure:: ../mermaid/intro/graph4.png
    :alt: hoverpy intro image4
 
 In this mode, Hoverfly uses either previously captured traffic, or
@@ -157,7 +157,7 @@ can use the Hoverfly “surrogate” instead of the real service.
 Synthesize mode
 ^^^^^^^^^^^^^^^
 
-.. figure:: mermaid/intro/graph5.png
+.. figure:: ../mermaid/intro/graph5.png
    :alt: hoverpy intro image5
 
 In this mode, Hoverfly doesn’t use any stored request/response pairs.
@@ -171,7 +171,7 @@ if you don’t want to write service data files.
 Modify mode
 ^^^^^^^^^^^
 
-.. figure:: mermaid/intro/graph6.png
+.. figure:: ../mermaid/intro/graph6.png
    :alt: hoverpy intro image6
 
 In this mode, Hoverfly passes requests through from to the server, and
