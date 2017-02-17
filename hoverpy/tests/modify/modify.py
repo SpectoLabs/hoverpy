@@ -7,21 +7,10 @@ import logging
 logging.basicConfig(filename='middleware.log', level=logging.DEBUG)
 logging.debug('Middleware "modify_request" called')
 
+payload = sys.stdin.readlines()[0]
+logging.debug(payload)
 
-def main():
-    data = sys.stdin.readlines()
-    # this is a json string in one line so we are interested in that one line
-    payload = data[0]
-    logging.debug(payload)
+payload_dict = json.loads(payload)
 
-    payload_dict = json.loads(payload)
-
-    payload_dict['request']['destination'] = "localhost:8888"
-    payload_dict['request']['method'] = "GET"
-
-    payload_dict['response']['status'] = 201
-    # returning new payload
-    print(json.dumps(payload_dict))
-
-if __name__ == "__main__":
-    main()
+payload_dict['response']['body'] = "modified!"
+print(json.dumps(payload_dict))

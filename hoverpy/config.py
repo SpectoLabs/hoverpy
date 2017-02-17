@@ -31,7 +31,7 @@ dist = getOS()+"_"+getArch()
 dirName = dirname(abspath(__file__))
 
 version = '0.1.20'
-dist_version = '0.9.2'
+dist_version = '0.10.1'
 
 hoverflyDirectory = join(
     expanduser("~"),

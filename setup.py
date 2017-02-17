@@ -8,7 +8,7 @@ version = '0.1.20'
 setup(
     name='hoverpy',
     install_requires=["requests"],
-    packages=['hoverpy'],
+    packages=['hoverpy', 'hoverpy.lib'],
     version=version,
     description='A python library for HoverFly',
     author='SpectoLabs',

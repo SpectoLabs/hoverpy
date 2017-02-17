@@ -1,10 +1,9 @@
 import unittest
 from hoverpy import HoverPy
 import logging
-from .. import basetestcase
 
 
-class TestTemplates(basetestcase.BaseTestCase):
+class TestTemplates(unittest.TestCase):
 
     def testTemplate(self):
         logging.debug("testTemplates")

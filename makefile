@@ -17,19 +17,16 @@ all:
 # ┬─┐┌─┐┬  ┌─┐┌─┐┌─┐┌─┐  ┌─┐┌─┐┌┬┐┌─┐┬ ┬  ┌┬┐┌─┐┌─┐┌┬┐  ┬  ┬┌─┐┬─┐┌─┐┬┌─┐┌┐┌
 # ├┬┘├┤ │  ├┤ ├─┤└─┐├┤   ├─┘├─┤ │ │  ├─┤   │ ├┤ └─┐ │   └┐┌┘├┤ ├┬┘└─┐││ ││││
 # ┴└─└─┘┴─┘└─┘┴ ┴└─┘└─┘  ┴  ┴ ┴ ┴ └─┘┴ ┴   ┴ └─┘└─┘ ┴    └┘ └─┘┴└─└─┘┴└─┘┘└┘
-release_test_patch: clean patch_tag commit push reg_and_upload_to_test_pypi clean
-
-release_patch: clean patch_tag commit push reg_and_upload_to_pypi clean
-
+release_test_patch: clean semver_patch tag commit push reg_and_upload_to_test_pypi clean
 release_test: clean tag commit push reg_and_upload_to_test_pypi clean
 
+release_patch: clean semver_patch tag commit push reg_and_upload_to_pypi clean
+release_minor: clean semver_minor tag commit push reg_and_upload_to_pypi clean
 release: clean tag commit push reg_and_upload_to_pypi clean
 
 reg_and_upload_to_test_pypi: register_test upload_test
 
 reg_and_upload_to_pypi: register upload
-
-patch_tag: semver_patch tag
 
 tag: do_tag push_tags
 
@@ -64,21 +61,6 @@ test:
 	python3.6 setup.py test
 
 docs: .PHONY
-	python hoverpy/generateDocs.py
-
-	pandoc --from=markdown --to=rst --output=docs/source/README.rst README.md
-
-	mv examples/basic/basic.rst docs/source/
-	mv examples/readthedocs/readthedocs.rst docs/source/
-	mv examples/modify/modify.rst docs/source/
-	mv examples/modify/modify_payload.rst docs/source/
-	mv examples/delays/delays.rst docs/source/
-	mv examples/unittesting/unittesting.rst docs/source/
-	mv examples/urllib2eg/urllib2eg.rst docs/source/
-	mv examples/urllib3eg/urllib3eg.rst docs/source/
-
-	sphinx-apidoc -o docs/source/ hoverpy hoverpy/tests hoverpy/config.py hoverpy/generateDocs.py -f
-	
 	cd docs; make html;
 #	cd docs/source/mermaid/intro; mermaid *;
 
@@ -131,6 +113,13 @@ push:
 
 semver_patch:
 	semver `head -1 VERSION` -i patch > VERSION
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ setup.py
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ hoverpy/config.py
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/source/conf.py
+	rm -f `find . -name '*.bak'`
+
+semver_minor:
+	semver `head -1 VERSION` -i minor > VERSION
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ setup.py
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ hoverpy/config.py
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/source/conf.py

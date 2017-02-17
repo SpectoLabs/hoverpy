@@ -12,12 +12,13 @@ I don't know about you, but for me the best way of getting into things is by try
    basic
    readthedocs
    unittesting
-   delays
+   latency
    modify
    urllib2eg
    urllib3eg
    soap
    modify_soap
-
+   tornado
+   twisted
 
 
