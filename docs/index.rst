@@ -1,7 +1,7 @@
 
 
-.. figure:: https://github.com/SpectoLabs/hoverpy/raw/master/docs/source/hoverpy_logo.png
-   :alt: 
+.. figure:: hoverpy_logo.png
+
 
 |PyPI version| |RTD badget|  |Build Status|
 
