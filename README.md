@@ -1,6 +1,6 @@
-[![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://testpypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/hoverpy/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)[![Build Status](https://travis-ci.org/SpectoLabs/hoverpy.svg?branch=master)](https://travis-ci.org/SpectoLabs/hoverpy)
+![](docs/hoverpy_logo.png)
 
-![](https://github.com/SpectoLabs/hoverpy/raw/master/docs/source/hoverpy_logo.png)
+[![PyPI version](https://badge.fury.io/py/hoverpy.svg)](https://pypi.python.org/pypi/hoverpy) [![RTD badget](https://readthedocs.org/projects/hoverpy/badge/?version=latest)](http://hoverpy.readthedocs.io/en/latest/)[![Build Status](https://travis-ci.org/SpectoLabs/hoverpy.svg?branch=master)](https://travis-ci.org/SpectoLabs/hoverpy)
 
 ### Documentation
 
