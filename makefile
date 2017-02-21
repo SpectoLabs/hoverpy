@@ -115,14 +115,14 @@ semver_patch:
 	semver `head -1 VERSION` -i patch > VERSION
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ setup.py
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ hoverpy/config.py
-	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/source/conf.py
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/conf.py
 	rm -f `find . -name '*.bak'`
 
 semver_minor:
 	semver `head -1 VERSION` -i minor > VERSION
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ setup.py
 	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ hoverpy/config.py
-	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/source/conf.py
+	sed -i .bak s/$(VERSION)/`head -1 VERSION`/ docs/conf.py
 	rm -f `find . -name '*.bak'`
 
 clean:
