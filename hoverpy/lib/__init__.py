@@ -5,12 +5,15 @@ except:
 
 class tornado(object):
 
-    def __init__(self, f):
-        self.f = f
+    def __init__(self, proxyPort=8500, proxyHost="localhost"):
+        self.port = proxyPort
+        self.host = proxyHost
 
-    def __call__(self, *args):
-        tor.configure()
-        return self.f(*args)
+    def __call__(self, f):
+        def wrapped_f(*args):
+            tor.configure(proxyPort=self.port, proxyHost=self.host)
+            f(*args)
+        return wrapped_f
 
 class twisted(object):
 

@@ -9,7 +9,7 @@ class MainHandler(web.RequestHandler):
 
 from hoverpy import capture, lib
 
-@lib.tornado
+@lib.tornado(proxyPort=8500, proxyHost="localhost")
 @capture(dbpath="tornado.db")
 def start():
     app = web.Application([("/", MainHandler)])
