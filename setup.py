@@ -3,7 +3,7 @@ try:
 except ImportError:
     from distutils.core import setup
 
-version = '0.1.21'
+version = '0.2.1'
 
 setup(
     name='hoverpy',
