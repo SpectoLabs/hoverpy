@@ -2,7 +2,7 @@
 
 |
 |PyPI version| |RTD badget|  |Build Status|
-|
+
 
 HoverPy
 =======
