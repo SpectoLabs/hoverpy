@@ -1,3 +1,9 @@
+.. image:: hoverpy_logo.png
+
+|
+|PyPI version| |RTD badget|  |Build Status|
+
+
 HoverPy
 =======
 
@@ -69,8 +75,6 @@ Source
 
 https://github.com/SpectoLabs/hoverpy/
 
-.. image:: hoverpy_logo.png
-
 License
 ~~~~~~~
 
@@ -99,10 +103,3 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-
-|
-
-|PyPI version| |RTD badget|  |Build Status|
-
-|
