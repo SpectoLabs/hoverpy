@@ -9,7 +9,7 @@ HoverPy can be used to make virtualise asynchronous requests made from Tornado's
 Capturing traffic
 -----------------
 
-.. literalinclude:: ../../../examples/tornado/svtornado.py
+.. literalinclude:: ../../../examples/tornado/svTornado.py
 
 Making a request to our server now captures the requests.
 
@@ -23,7 +23,7 @@ Simulating traffic
 
 We can how switch our server to simulate mode:
 
-.. literalinclude:: ../../../examples/tornado/simtornado.py
+.. literalinclude:: ../../../examples/tornado/simTornado.py
 
 Which means we are no longer hitting the real downstream dependency.
 
@@ -32,7 +32,7 @@ Modifying traffic
 
 HoverPy can also be used to modify your requests, to introduce failures, or build tolerant readers
 
-.. literalinclude:: ../../../examples/tornado/modtornado.py
+.. literalinclude:: ../../../examples/tornado/modTornado.py
 
 This is our middleware:
 
