@@ -1,3 +1,4 @@
+*.db
 .venv
 .eggs
 *.bak

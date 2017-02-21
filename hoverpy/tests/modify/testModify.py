@@ -2,19 +2,18 @@ import unittest
 from hoverpy import HoverPy
 import requests
 import logging
-from .. import basetestcase
 
 
-class TestModify(basetestcase.BaseTestCase):
+class TestModify(unittest.TestCase):
 
     def testModify(self):
         logging.debug("testModify")
         with HoverPy(
                 modify=True,
-                middleware="python tests/modify/modify.py"):
-            r = requests.get("http://example.com")
+                middleware="python hoverpy/tests/modify/modify.py"):
+            r = requests.get("http://localhost:8888")
 
-            self.assertIn("Hoverfly", r.text)
+            self.assertIn("modified!", r.text)
 
 if __name__ == '__main__':
     unittest.main()

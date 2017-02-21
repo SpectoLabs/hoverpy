@@ -54,12 +54,12 @@ Library Support
 
 HoverPy works great with the following HTTP clients out of the box:
 
--  :ref:`tornado`
--  :ref:`twisted`
--  :ref:`requests <basic>`
--  :ref:`urllib2`
--  :ref:`urllib3`
--  :ref:`pysimplesoap`
+-  tornado
+-  twisted
+-  requests
+-  urllib2
+-  urllib3
+-  pysimplesoap
 -  etc.
 
 Since HoverPy can act as a proxy or a reverse proxy, it can easily be made to work with any networking library or framework.

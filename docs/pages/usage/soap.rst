@@ -1,4 +1,4 @@
-.. soap
+.. _pysimplesoap:
 
 ====
 soap

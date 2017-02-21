@@ -4,43 +4,26 @@
 modify
 ======
 
-Let's look into mutating responses using middleware. This is particularly useful for sending curved balls to your applications, and make sure they deal with them correctly. 
+Modifying requests and responses via middleware is simply a matter of using the ``modify`` function decorator.
+
+.. literalinclude:: ../../../examples/modify/modify.py
+
+.. code:: bash
+  
+  $ python examples/modify/modify.py
+
+Output:
 
 ::
 
->>> from hoverpy import HoverPy
->>> import requests
->>> with HoverPy(
->>>         modify=True,
->>>         middleware="python examples/modify/modify_payload.py") as hoverpy:
+  {u'date': u'2017-02-17', u'epoch': 101010, u'time': u'21:22:38'}
 
+As you can see, the epoch has been successfully modified by the middleware script.
 
-Above we created our HoverPy object with modify and middleware enabled. Please note this brings in ``python examples/modify/modify_payload.py`` which will get run on every request. 
+Middleware
+----------
 
-::
+Middleware is required, and can be written in any language that is supported in your development environment.
 
->>>     for i in range(30):
->>>         r = requests.get("http://time.jsontest.com")
+.. literalinclude:: ../../../examples/modify/middleware.py
 
-
-Let's make 30 requests to http://time.jsontest.com which simply gets us the current local time 
-
-::
-
->>>         if "time" in r.json().keys():
->>>             print(
->>>                 "response successfully modified, current date is " +
->>>                 r.json()["time"])
-
-
-The ``time`` key is inside the response, which is what we expected. 
-
-::
-
->>>         else:
->>>             print("something went wrong - deal with it gracefully")
-
-
-However if the ``time`` key isn't in the response, then something clearly went wrong. Next let's take a look at the middleware.
-
-.. include:: modify_payload.rst 

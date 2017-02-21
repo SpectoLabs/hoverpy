@@ -4,6 +4,15 @@
 Installation
 ============
 
+Installing from PIP
+-------------------
+
+You can also install HoverPy from PIP:
+
+.. code:: bash
+
+    $ pip install hoverpy
+
 Cloning
 -------
 
@@ -53,22 +62,6 @@ Please note we'll cover the examples in the `usage`_ page. But for the truly imp
 .. code:: bash
 
     $ python examples/basic/basic.py
-
-Installing from repo
---------------------
-
-.. code:: bash
-
-    $ sudo python setup.py install
-
-Installing from PIP
--------------------
-
-You can also install HoverPy from PIP:
-
-.. code:: bash
-
-    $ pip install hoverpy
 
 Hoverfly binary
 ---------------
