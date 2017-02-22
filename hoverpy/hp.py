@@ -279,6 +279,58 @@ class HoverPy:
         del os.environ['HTTPS_PROXY']
         del os.environ['REQUESTS_CA_BUNDLE']
 
+    def __writepid(self, pid):
+        """
+        HoverFly fails to launch if it's already running on
+        the same ports. So we have to keep track of them using
+        temp files with the proxy port and admin port, containing
+        the processe's PID. 
+        """
+        import tempfile
+        d = tempfile.gettempdir()
+        name = os.path.join(d, "hoverpy.%i.%i"%(self._proxyPort, self._adminPort))
+        with open(name, 'w') as f:
+            f.write(str(pid))
+            logging.debug("writing to %s"%name)
+
+    def __rmpid(self):
+        """
+        Remove the PID file on shutdown, unfortunately
+        this may not get called if not given the time to
+        shut down.
+        """
+        import tempfile
+        d = tempfile.gettempdir()
+        name = os.path.join(d, "hoverpy.%i.%i"%(self._proxyPort, self._adminPort))
+        if os.path.exists(name):
+            os.unlink(name)
+            logging.debug("deleting %s"%name)
+
+    def __kill_if_not_shut_properly(self):
+        """
+        If the HoverFly process on these given ports
+        did not shut down correctly, then kill the pid
+        before launching a new instance.
+        todo: this will kill existing HoverFly processes
+        on those ports indiscriminately
+        """
+        import tempfile
+        d = tempfile.gettempdir()
+        name = os.path.join(d, "hoverpy.%i.%i"%(self._proxyPort, self._adminPort))
+        if os.path.exists(name):
+            logging.debug("pid file exists.. killing it")
+            f = open(name, "r")
+            pid = int(f.read())
+            try:
+                import signal
+                os.kill(pid, signal.SIGTERM)
+                logging.debug("killing %i"%pid)
+            except:
+                logging.debug("nothing to clean up")
+                pass
+            finally:
+                os.unlink(name)
+
     def __start(self):
         """
         Start the hoverfly process.
@@ -287,6 +339,7 @@ class HoverPy:
         with the hoverfly API before returning.
         """
         logging.debug("starting %i" % id(self))
+        self.__kill_if_not_shut_properly()
         self.FNULL = open(os.devnull, 'w')
         flags = self.__flags()
         cmd = [hoverfly] + flags
@@ -307,10 +360,13 @@ class HoverPy:
                 up = "message" in j and "healthy" in j["message"]
                 if up:
                     logging.debug("has pid %i" % self._process.pid)
+                    self.__writepid(self._process.pid)
                     return self._process
                 else:
                     time.sleep(1/100.0)
             except:
+                # import traceback
+                # traceback.print_exc()
                 # wait 10 ms before trying again
                 time.sleep(1/100.0)
                 pass
@@ -335,6 +391,7 @@ class HoverPy:
         self.__disableProxy()
         # del self._session
         # self._session = None
+        self.__rmpid()
 
     def __flags(self):
         """
