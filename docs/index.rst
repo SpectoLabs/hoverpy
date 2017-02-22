@@ -37,7 +37,7 @@ This grants several benefits:
 
 .. code:: python
 
-  from hoverpy import capture, modify
+  from hoverpy import simulate, modify
   import requests
 
   @simulate("requests.db", delays=[("time.json.com", 1000)])
