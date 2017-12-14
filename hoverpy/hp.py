@@ -48,7 +48,8 @@ class HoverPy:
                  tlsVerification=True,
                  httpsToHttp=False,
                  recordMode=None,
-                 showCmd=False
+                 showCmd=False,
+                 spy=False
                  ):
         self._proxyPort = proxyPort
         self._adminPort = adminPort
@@ -79,13 +80,16 @@ class HoverPy:
         self._httpsToHttp = httpsToHttp
         self._recordMode = recordMode
         self._showCmd = showCmd
+        self._spy = spy
         self.__enableProxy()
 
         if self._recordMode == "once":
             self._capture = not os.path.isfile(self._dbpath)
 
         self.__start()
-        self.__addDelaysFromParam()
+
+        if self._delays:
+            self.__addDelaysFromParam()
 
 
     def wipe(self):
@@ -115,6 +119,12 @@ class HoverPy:
         Please note simulate is the default mode.
         """
         return self.mode("simulate")
+
+    def spy(self):
+        """
+        Switches hoverfly to spy mode.
+        """
+        return self.mode("spy")
 
     def config(self):
         """
@@ -348,8 +358,8 @@ class HoverPy:
         self._process = Popen(
             [hoverfly] +
             flags,
-            stdin=self.FNULL,
-            stdout=self.FNULL,
+            #stdin=self.FNULL,
+            #stdout=self.FNULL,
             stderr=subprocess.STDOUT)
         start = time.time()
         while time.time() - start < 1:
@@ -400,6 +410,8 @@ class HoverPy:
         flags = []
         if self._capture:
             flags.append("-capture")
+        if self._spy:
+            flags.append("-spy")
         if self._dbpath:
             flags += ["-db-path", self._dbpath]
             flags += ["-db", "boltdb"]
