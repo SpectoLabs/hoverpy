@@ -358,8 +358,8 @@ class HoverPy:
         self._process = Popen(
             [hoverfly] +
             flags,
-            #stdin=self.FNULL,
-            #stdout=self.FNULL,
+            stdin=self.FNULL,
+            stdout=self.FNULL,
             stderr=subprocess.STDOUT)
         start = time.time()
         while time.time() - start < 1:
