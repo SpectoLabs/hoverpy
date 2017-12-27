@@ -26,6 +26,18 @@ class simulate(object):
                 return f(*args)
         return wrapped_f
 
+class spy(object):
+
+    def __init__(self, dbpath="requests.db", capture=False, **kwargs):
+        self.dbpath = dbpath
+        self.capture = capture
+        self.kwargs = kwargs
+
+    def __call__(self, f):
+        def wrapped_f(*args):
+            with HoverPy(spy=True, capture=self.capture, dbpath=self.dbpath, **self.kwargs):
+                return f(*args)
+        return wrapped_f
 
 class modify(object):
 
