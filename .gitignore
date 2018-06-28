@@ -13,3 +13,4 @@ requests.db
 /bin
 /docs/build
 .idea
+.vscode/
