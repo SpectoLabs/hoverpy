@@ -11,49 +11,49 @@ class TestVirt(unittest.TestCase):
 
     def testCapture(self):
         with HoverPy(capture=True) as hp:
-            r = requests.get("http://time.ioloop.io?format=json")
+            r = requests.get("http://jsonplaceholder.typicode.com/posts/1")
             j = r.json()
-            self.assertIn("time", j)
+            self.assertIn("body", j)
             sim = hp.simulation()
-            self.assertEquals("time.ioloop.io", sim["data"]["pairs"][0]["request"]["destination"])
+            self.assertEqual("jsonplaceholder.typicode.com", sim["data"]["pairs"][0]["request"]["destination"])
 
     def testPlayback(self):
         with HoverPy(capture=True) as hp:
-            r1 = requests.get("http://time.ioloop.io?format=json")
+            r1 = requests.get("http://jsonplaceholder.typicode.com/posts/1")
             hp.simulate()
             time.sleep(0.01)
-            r2 = requests.get("http://time.ioloop.io?format=json")
-            self.assertEquals(r1.json()["epoch"], r2.json()["epoch"])
+            r2 = requests.get("http://jsonplaceholder.typicode.com/posts/1")
+            self.assertEqual(r1.json(), r2.json())
 
     # in memory doesn't seem to be working
     # def testInMemory(self):
     #     with HoverPy(showCmd=True, db="memory") as hp:
-    #         r1 = requests.get("http://time.ioloop.io?format=json")
+    #         r1 = requests.get("http://jsonplaceholder.typicode.com/posts/1")
     #         hp.simulate()
     #         time.sleep(0.01)
-    #         r2 = requests.get("http://time.ioloop.io?format=json")
-    #         self.assertEquals(r1.json()["epoch"], r2.json()["epoch"])
+    #         r2 = requests.get("http://jsonplaceholder.typicode.com/posts/1")
+    #         self.assertEqual(r1.json()["epoch"], r2.json()["epoch"])
 
     def testDecorators(self):
         @capture(dbpath="decorators.db")
         def testCapture():
             logging.debug("test_capture")
-            r = requests.get("http://time.ioloop.io?format=json")
+            r = requests.get("http://jsonplaceholder.typicode.com/posts/1")
             j = r.json()
-            self.assertIn('epoch', j)
+            self.assertIn('body', j)
             time.sleep(0.01)
-            return j["epoch"]
+            return j["body"]
 
         @simulate(dbpath="decorators.db")
-        def testSimulate(epoch):
+        def testSimulate(body):
             logging.debug("test_simulate")
-            r = requests.get("http://time.ioloop.io?format=json")
+            r = requests.get("http://jsonplaceholder.typicode.com/posts/1")
             j = r.json()
-            self.assertIn('epoch', j)
-            self.assertEquals(j["epoch"], epoch)
+            self.assertIn('body', j)
+            self.assertEqual(j["body"], body)
 
-        epoch = testCapture()
-        testSimulate(epoch)
+        body = testCapture()
+        testSimulate(body)
         os.unlink("decorators.db")
 
 if __name__ == '__main__':
